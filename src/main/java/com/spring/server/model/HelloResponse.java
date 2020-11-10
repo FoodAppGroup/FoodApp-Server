@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 public class HelloResponse {
 
-    @ApiModelProperty(value = "The personal welcome message", example = "Hello Thomas!")
+    @ApiModelProperty(value = "The personal welcome message.", example = "Hello Thomas!")
     private String message;
 }
