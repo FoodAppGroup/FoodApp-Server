@@ -99,6 +99,11 @@ public class Food {
         return mapper.writeValueAsString(this);
     }
 
+    /*
+    ____________________________________________________________________________________________________________________
+    Utility
+     */
+
     @SneakyThrows
     private Food createFood(String jsonData) {
         ObjectMapper mapper = new ObjectMapper();
