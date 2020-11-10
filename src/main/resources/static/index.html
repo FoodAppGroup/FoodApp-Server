@@ -1,18 +1,43 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html lang="en">
-<head>
-    <title>You first Spring application</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-<p><a href="/hello">Greet the world!</a></p>
 
-<form action="/hello" method="GET" id="nameForm">
-    <div>
-        <label for="nameField">How should the app call you?</label>
-        <input name="myName" id="nameField">
-        <button>Greet me!</button>
+<head>
+    <title>Spring Server</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/Navigation-with-Button.css" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+    <div class="container">
+        <a class="navbar-brand" href="#">Spring Server</a>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="nav navbar-nav mr-auto">
+                <li class="nav-item" onclick="loadContent('/')">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item" onclick="loadContent('/swagger-ui/')">
+                    <a class="nav-link" href="#">Swagger</a>
+                </li>
+                <li class="nav-item" onclick="loadContent('./helloWorld.html')">
+                    <a class="nav-link" href="#">Hello</a>
+                </li>
+                <li class="nav-item" onclick="loadContent('/hello2')">
+                    <a class="nav-link" href="#">Hello2</a>
+                </li>
+                <li class="nav-item" onclick="loadContent('/swagger-ui/')">
+                    <a class="nav-link" href="#">Test</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</form>
+</nav>
+<div id="display" style="height: max-content; width: max-content">
+    <iframe height=1080 id="displayFrame" width=1920></iframe>
+</div>
+<script src="index.js"></script>
 </body>
+
 </html>
