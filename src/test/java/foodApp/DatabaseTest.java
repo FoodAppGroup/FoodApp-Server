@@ -36,7 +36,7 @@ class DatabaseTest {
 
     @AfterAll
     static void endTest() {
-        database.closeConnectionToDB();
+        database.disconnectionFromDB();
     }
 
     /*

@@ -6,6 +6,7 @@ import foodApp.objects.Recipe;
 import lombok.SneakyThrows;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,7 +39,7 @@ public class Database {
     }
 
     @SneakyThrows
-    public void closeConnectionToDB() {
+    public void disconnectionFromDB() {
         logger.info("Closing connection to: " + URL);
         statement.close();
         connection.close();
@@ -69,9 +70,33 @@ public class Database {
         return new Food(executeSelectDB(sqlSelect));
     }
 
+    public ArrayList<Food> getAllFoods() throws SQLException {
+        String sqlSelect = "SELECT * FROM foods_table";
+        ArrayList<Food> list = new ArrayList<>();
+        ResultSet resultSet = executeSelectDB(sqlSelect);
+        while (resultSet.next()) {
+            list.add(new Food(resultSet));
+        }
+        resultSet.close();
+        statement.close();
+        return list;
+    }
+
     public Recipe getRecipe(String recipeName) throws SQLException, JsonProcessingException {
         String sqlSelect = "SELECT * FROM \"recipes_table\" WHERE \"name\"='" + recipeName + "'";
         return new Recipe(executeSelectDB(sqlSelect));
+    }
+
+    public ArrayList<Recipe> getAllRecipes() throws SQLException, JsonProcessingException {
+        String sqlSelect = "SELECT * FROM recipes_table";
+        ArrayList<Recipe> list = new ArrayList<>();
+        ResultSet resultSet = executeSelectDB(sqlSelect);
+        while (resultSet.next()) {
+            list.add(new Recipe(resultSet));
+        }
+        resultSet.close();
+        statement.close();
+        return list;
     }
 
     /*

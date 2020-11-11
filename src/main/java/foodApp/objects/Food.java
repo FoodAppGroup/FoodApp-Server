@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import foodApp.enums.FoodUnit;
+import jsonUtility.JsonBuilder;
 import lombok.Data;
 import lombok.SneakyThrows;
 
@@ -105,8 +106,7 @@ public class Food {
     @SneakyThrows
     @Override
     public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(this);
+        return JsonBuilder.build(this);
     }
 
     /*
