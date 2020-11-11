@@ -5,3 +5,10 @@
 ## IntelliJ Settings:
 
 * https://plugins.jetbrains.com/plugin/6317-lombok
+
+
+## Objects
+
+All objects use the @Data Annotation. 
+
+Documentation: https://projectlombok.org/features/Data
