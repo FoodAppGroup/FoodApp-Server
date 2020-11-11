@@ -1,30 +1,33 @@
 package foodApp.objects;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.junit.jupiter.api.*;
 
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class FoodTest {
 
     private static Food testFood121;
-    private static String storage;
+    private static String stringStorage;
 
     @BeforeAll
     static void startTest() {
-        testFood121 = new Food("Test121", 121, 121, 121, 121, 121, 121, "stk", 121);
+        testFood121 = new Food("Test121", 121, 121, 121, 121, "gram", 121);
     }
 
 
     @Test
-    @Order(2)
-    void jsonMethods() {
-        storage = testFood121.toString();
-        Food tempFood = new Food(storage);
+    @Order(1)
+    void writeJson() {
+        stringStorage = testFood121.toString();
+        Assertions.assertNotNull(stringStorage);
+    }
 
-        Assertions.assertEquals(testFood121, tempFood, "Tested simple equals method.");
-        Assertions.assertTrue(tempFood.equalsFull(testFood121), "Tested full equals method.");
+    @Test
+    @Order(2)
+    void readJson() throws JsonProcessingException {
+        Food food = new Food(stringStorage);
+        Assertions.assertEquals(testFood121, food, "Tested simple equals method.");
+        Assertions.assertTrue(food.equalsFull(testFood121), "Tested full equals method.");
     }
 
 }
