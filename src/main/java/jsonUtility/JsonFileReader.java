@@ -11,9 +11,9 @@ public class JsonFileReader {
             String line;
             StringBuilder stringBuilder = new StringBuilder();
             while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
+                stringBuilder.append(line).append("\n");
             }
-            return stringBuilder.toString().replace(" ", "");
+            return stringBuilder.toString();
         }
     }
 }
