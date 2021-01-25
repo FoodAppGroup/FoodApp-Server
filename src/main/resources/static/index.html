@@ -2,41 +2,70 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="assets/css/IFrame.css"/>
-    <title>Spring Server</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/Navigation-with-Button.css" rel="stylesheet">
+    <title>FoodApp Server</title>
     <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            top: 0;
+            width: 100%;
+            position: sticky;
+            overflow: hidden;
+            background-color: #333;
+        }
 
+        li {
+            float: left;
+            border-right: 1px solid #bbb;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li:last-child {
+            border-right: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #111;
+        }
+
+        #displayFrame {
+            width: 100%;
+            width: -moz-available; /* WebKit-based browsers will ignore this. */
+            width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+            width: fill-available;
+            width: -webkit-fill-available;
+            height: 100%;
+            height: -moz-available; /* WebKit-based browsers will ignore this. */
+            height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+            height: fill-available;
+            height: -webkit-fill-available;
+        }
     </style>
 </head>
 
 <body>
-<nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
-    <div class="container">
-        <a class="navbar-brand" href="#">Spring Server</a>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="nav navbar-nav mr-auto">
-                <li class="nav-item" onclick="loadContent('/')">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item" onclick="loadContent('/swagger-ui/')">
-                    <a class="nav-link" href="#">Swagger</a>
-                </li>
-                <li class="nav-item" onclick="loadContent('./helloWorld.html')">
-                    <a class="nav-link" href="#">Hello</a>
-                </li>
-                <li class="nav-item" onclick="loadContent('/hello2')">
-                    <a class="nav-link" href="#">Hello2</a>
-                </li>
-                <li class="nav-item" onclick="loadContent('/swagger-ui/')">
-                    <a class="nav-link" href="#">Test</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+<nav class="navbar">
+    <ul>
+        <li onclick="loadContent('/')"><a class="active" href="#">Home</a></li>
+        <li onclick="loadContent('/swagger-ui/')"><a href="#">Swagger</a></li>
+        <li onclick="loadContent('./helloWorld.html')"><a class="nav-link" href="#">Hello</a></li>
+        <li onclick="loadContent('/hello2')"><a class="nav-link" href="#">Hello2</a></li>
+        <li onclick="loadContent('/swagger-ui/')"><a class="nav-link" href="#">Test</a></li>
+    </ul>
 </nav>
 <div id="display">
     <iframe id="displayFrame"></iframe>
