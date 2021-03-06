@@ -25,14 +25,15 @@ services:
   # App backend service
   foodapp_server:
     # Configuration for building the docker image for the backend service
+    depends_on:
+      - mysql_database # This service depends on mysql. Start that first.
+    container_name: foodapp_server
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
     restart: always
-    depends_on:
-      - mysql_database # This service depends on mysql. Start that first.
     networks: # Networks to join (Services on the same network can communicate with each other using their name)
       - backend
       - frontend
