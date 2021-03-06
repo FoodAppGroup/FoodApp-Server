@@ -1,0 +1,52 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+# Tutorial Reference (https://www.callicoder.com/spring-boot-mysql-react-docker-compose-example/)
+
+version: '3.8'
+
+# Define services
+services:
+  # Database Service (Mysql)
+  mysql_database:
+    image: mysql:8.0
+    container_name: mysql_database
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_DATABASE: foodapp_database
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql_database_data:/var/lib/mysql
+    networks:
+      - backend
+
+  # App backend service
+  foodapp_server:
+    # Configuration for building the docker image for the backend service
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    restart: always
+    depends_on:
+      - mysql_database # This service depends on mysql. Start that first.
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - backend
+      - frontend
+
+  # Frontend Service
+  # see the Tutorial Reference for later
+
+
+
+# Volumes
+volumes:
+  mysql_database_data:
+
+# Networks to be created to facilitate communication between containers
+networks:
+  backend:
+  frontend:
