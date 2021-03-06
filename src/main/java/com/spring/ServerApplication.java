@@ -1,9 +1,8 @@
-package com.spring.server;
+package com.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -11,7 +10,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 //Alternative:
 @SpringBootConfiguration
 @EnableAutoConfiguration
-@ComponentScan(basePackages = "com.spring.server")
+@ComponentScan(basePackages = "com.spring")
 @EnableSwagger2
 public class ServerApplication {
 
