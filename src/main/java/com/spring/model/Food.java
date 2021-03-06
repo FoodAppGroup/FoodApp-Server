@@ -7,9 +7,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -20,6 +18,7 @@ public class Food {
     @ApiModelProperty(value = "Name of the food.", example = "Apfel")
     private String name;
     @NotNull
+    @Enumerated(EnumType.STRING)
     @ApiModelProperty(value = "Category in the store.", example = "FRUIT")
     private Category category;
     @NotNull
@@ -38,6 +37,7 @@ public class Food {
     @ApiModelProperty(value = "Fat per 100g", example = "10")
     private int fat;
     @NotNull
+    @Enumerated(EnumType.STRING)
     @ApiModelProperty(value = "Unit of the food.", example = "GRAM")
     private Unit unit;
 
