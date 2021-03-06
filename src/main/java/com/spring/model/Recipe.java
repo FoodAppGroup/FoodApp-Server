@@ -1,9 +1,8 @@
-package foodApp.objects;
+package com.spring.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import foodApp.Database;
 import jsonUtility.JsonBuilder;
 import lombok.Data;
 import lombok.SneakyThrows;
@@ -106,32 +105,6 @@ public class Recipe {
     @Override
     public String toString() {
         return JsonBuilder.build(this);
-    }
-
-    public void calcNutrition(Database database) {
-        //reset values
-        this.kcal = 0;
-        this.carbohydrates = 0;
-        this.protein = 0;
-        this.fat = 0;
-        //loop over parts
-        Set<String> keySet = parts.keySet();
-        for (String foodName : keySet) {
-            Food food;
-            try {
-                food = database.getFood(foodName);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                continue;
-            }
-            int count = parts.get(foodName);
-            //TODO FoodUnit need to be used
-            //calculate values
-            this.kcal += food.getKcal() * count;
-            this.carbohydrates += food.getCarbohydrates() * count;
-            this.protein += food.getProtein() * count;
-            this.fat += food.getFat() * count;
-        }
     }
 
     /*
