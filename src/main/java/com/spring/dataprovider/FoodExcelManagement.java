@@ -1,4 +1,4 @@
-package com.spring.database;
+package com.spring.dataprovider;
 
 import com.spring.model.Food;
 import com.spring.model.entity.Category;
@@ -10,11 +10,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FoodExcelManagement extends ExcelManagement<Food> {
+public class FoodExcelManagement extends ExcelManagement {
 
-    private final String foodTableFilePath = "src/main/resources/database-backup/food-table.xlsx";
-
-    public void writeTable(List<Food> list) throws IOException {
+    public static void writeTable(List<Food> list) throws IOException {
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Foods");
         sheet.setColumnWidth(0, 6000);
@@ -28,12 +26,12 @@ public class FoodExcelManagement extends ExcelManagement<Food> {
             writeFoodRow(sheet, i + 1, list.get(i), style);
         }
 
-        FileOutputStream outputStream = new FileOutputStream(foodTableFilePath);
+        FileOutputStream outputStream = new FileOutputStream(PropertyReader.getInstance().getExcel_FoodTablePath());
         workbook.write(outputStream);
         workbook.close();
     }
 
-    private void writeHeader(Sheet sheet, CellStyle style) {
+    private static void writeHeader(Sheet sheet, CellStyle style) {
         Row row = sheet.createRow(0);
         writeCell(row, 0, "Name", style);
         writeCell(row, 1, "Category", style);
@@ -45,7 +43,7 @@ public class FoodExcelManagement extends ExcelManagement<Food> {
         writeCell(row, 7, "Unit", style);
     }
 
-    private void writeFoodRow(Sheet sheet, int rowIndex, Food food, CellStyle style) {
+    private static void writeFoodRow(Sheet sheet, int rowIndex, Food food, CellStyle style) {
         Row row = sheet.createRow(rowIndex);
         writeCell(row, 0, food.getName(), style);
         writeCell(row, 1, food.getCategory().toString(), style);
@@ -57,9 +55,9 @@ public class FoodExcelManagement extends ExcelManagement<Food> {
         writeCell(row, 7, food.getUnit().toString(), style);
     }
 
-    public List<Food> readTable() throws IOException {
+    public static List<Food> readTable() throws IOException {
         List<Food> list = new ArrayList<>();
-        try (Workbook workbook = new XSSFWorkbook(new FileInputStream(new File(foodTableFilePath)))) {
+        try (Workbook workbook = new XSSFWorkbook(new FileInputStream(new File(PropertyReader.getInstance().getExcel_FoodTablePath())))) {
             Sheet sheet = workbook.getSheetAt(0);
             for (int i = 1; i < sheet.getPhysicalNumberOfRows(); i++) {
                 try {
@@ -74,7 +72,7 @@ public class FoodExcelManagement extends ExcelManagement<Food> {
         return list;
     }
 
-    private Food readFood(Row row) throws IllegalArgumentException {
+    private static Food readFood(Row row) throws IllegalArgumentException {
         Food food = new Food();
         food.setName(readCell(row.getCell(0)));
         food.setCategory(readCategory(row.getCell(1)));
@@ -87,11 +85,11 @@ public class FoodExcelManagement extends ExcelManagement<Food> {
         return food;
     }
 
-    private Category readCategory(Cell cell) throws IllegalArgumentException {
+    private static Category readCategory(Cell cell) throws IllegalArgumentException {
         return Category.getValue(readCell(cell));
     }
 
-    private Unit readUnit(Cell cell) throws IllegalArgumentException {
+    private static Unit readUnit(Cell cell) throws IllegalArgumentException {
         return Unit.getValue(readCell(cell));
     }
 }

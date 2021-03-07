@@ -1,6 +1,6 @@
 package testutils;
 
-import com.spring.database.FoodExcelManagement;
+import com.spring.dataprovider.FoodExcelManagement;
 import com.spring.logging.Console;
 import com.spring.model.Food;
 
@@ -9,10 +9,21 @@ import java.util.List;
 
 public class TestMain {
     public static void main(String[] args) throws IOException, InterruptedException {
-        List<Food> list = new FoodExcelManagement().readTable();
+        List<Food> list = FoodExcelManagement.readTable();
         Console.log(list.toString());
-        new FoodExcelManagement().writeTable(list);
-        Thread.sleep(10000);
+        FoodExcelManagement.writeTable(list);
+
+        Console.log("test");
+        Console.log("test");
+        Console.log("test");
+        Console.log("test");
+        Console.log("test123");
+        Console.log("test");
+        Console.log("test");
+        Console.log("test");
+        Console.log("test");
+        Console.log("test");
+        Console.log("testend");
 
     }
 }
