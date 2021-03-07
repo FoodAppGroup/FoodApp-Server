@@ -72,33 +72,6 @@ public class Recipe {
     }
 
     /*
-    Overrides the complex equals() to a simple equals with only the name.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Recipe recipe = (Recipe) o;
-        return this.name.equalsIgnoreCase(recipe.getName());
-    }
-
-    /*
-    Still providing the complex equals() method.
-     */
-    public boolean equalsFull(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Recipe recipe = (Recipe) o;
-        return kcal == recipe.kcal &&
-                carbohydrates == recipe.carbohydrates &&
-                protein == recipe.protein &&
-                fat == recipe.fat &&
-                name.equals(recipe.name) &&
-                parts.equals(recipe.parts) &&
-                description.equals(recipe.description);
-    }
-
-    /*
     toString() generates a json
      */
     @SneakyThrows
