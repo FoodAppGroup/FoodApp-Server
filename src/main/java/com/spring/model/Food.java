@@ -9,33 +9,41 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
-@Entity
-@Table(name = "food")
-@ApiModel
+@Data // Lombock Data -> getter and setter
+@Entity // JPA Entity
+@Table(name = "food") // JPA Table
+@ApiModel //Swagger Model
 public class Food {
-    @Id //Primary Key
-    @ApiModelProperty(value = "Name of the food.", example = "Apfel")
+
+    @Id //Primary Key (JPA)
+    @ApiModelProperty(value = "Name of the food.", example = "Apfel") //Swagger Model Property
     private String name;
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @ApiModelProperty(value = "Category in the store.", example = "FRUIT")
+
+    @NotNull // JPA Not Null
+    @Enumerated(EnumType.STRING) // JPA save Enum as string
+    @ApiModelProperty(value = "Category in the store.", example = "FRUIT") // Swagger Model Property
     private Category category;
+
     @NotNull
     @ApiModelProperty(value = "Gram in one package of the store.", example = "500")
     private int packageGramm;
+
     @NotNull
     @ApiModelProperty(value = "kCal per 100g", example = "400")
     private int kCal;
+
     @NotNull
     @ApiModelProperty(value = "Carbohydrates per 100g", example = "20")
     private int carbohydrates;
+
     @NotNull
     @ApiModelProperty(value = "Protein per 100g", example = "10")
     private int protein;
+
     @NotNull
     @ApiModelProperty(value = "Fat per 100g", example = "10")
     private int fat;
+
     @NotNull
     @Enumerated(EnumType.STRING)
     @ApiModelProperty(value = "Unit of the food.", example = "GRAM")
@@ -43,18 +51,5 @@ public class Food {
 
     //Constructor for JPA
     public Food() {
-    }
-
-    /*
-    ____________________________________________________________________________________________________________________
-    Utility
-     */
-
-    private Unit selectFoodUnit(String text) {
-        if (text.equalsIgnoreCase("gram") || text.equalsIgnoreCase("gramm")) {
-            return Unit.GRAM;
-        } else {
-            return Unit.PIECES;
-        }
     }
 }
