@@ -1,4 +1,4 @@
-# Food App Spring API
+# Food App Spring API (Fresh Planner)
 
 ## Useful Links
 
