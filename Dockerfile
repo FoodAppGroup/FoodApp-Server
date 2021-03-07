@@ -1,5 +1,5 @@
 FROM maven:3.6.3-jdk-11 as builder
-MAINTAINER Felix Steinke <steinke.felix@yahoo.com>
+MAINTAINER Felix Steinke <steinke.felix@yahoo.de>
 
 COPY  . /root/app/
 WORKDIR /root/app
