@@ -10,7 +10,7 @@ services:
     image: mysql:8.0
     container_name: mysql_database
     ports:
-      - "3306:3306"
+      - 3306:3306
     restart: always
     environment:
       MYSQL_DATABASE: foodapp_database
