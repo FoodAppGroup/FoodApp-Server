@@ -11,12 +11,13 @@ import javax.persistence.*;
 
 @Data // Lombock Data -> getter and setter
 @Entity // JPA Entity
-@Table(name = "food") // JPA Table
+@Table(name = "product") // JPA Table
 @ApiModel //Swagger Model
-public class Food {
+public class Product {
 
     @Id //Primary Key (JPA)
-    @ApiModelProperty(value = "Name of the food.", example = "Apfel") //Swagger Model Property
+    @Column(name = "PRODUCT_NAME")
+    @ApiModelProperty(value = "Name of the product.", example = "Apfel") //Swagger Model Property
     private String name;
 
     @NotNull // JPA Not Null
@@ -46,10 +47,13 @@ public class Food {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @ApiModelProperty(value = "Unit of the food.", example = "GRAM")
+    @ApiModelProperty(value = "Unit of the product.", example = "GRAM")
     private Unit unit;
 
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    private Stock stock;
+
     //Constructor for JPA
-    public Food() {
+    public Product() {
     }
 }

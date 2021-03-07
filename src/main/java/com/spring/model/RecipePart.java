@@ -1,27 +1,32 @@
 package com.spring.model;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 
+import javax.persistence.*;
+
 @Data
-//@Entity
-//@Table(name = "recipe-part")
+@Entity
+@Table(name = "recipe-part")
 public class RecipePart {
 
-// https://stackoverflow.com/questions/853076/jpa-mapstring-string-mapping
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private int id;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "recipeName")
-//    private Recipe recipeName;
-//
-//    @OneToOne
-//    private Food foodName;
-//
-//    @NotNull
-//    private int amountOfFood;
-//
-//    public RecipePart(){
-//    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private int id;
+
+    @NotNull
+    @Column(name = "RECIPE_KEY")
+    private String recipeName;
+
+    @NotNull
+    @Column(name = "PRODUCT_KEY")
+    private String productName;
+
+    @NotNull
+    @Column(name = "NUMBER")
+    private int number;
+
+    public RecipePart() {
+    }
 }

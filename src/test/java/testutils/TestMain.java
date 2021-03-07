@@ -1,17 +1,17 @@
 package testutils;
 
-import com.spring.dataprovider.FoodExcelManagement;
+import com.spring.dataprovider.ProductExcelManagement;
 import com.spring.logging.Console;
-import com.spring.model.Food;
+import com.spring.model.Product;
 
 import java.io.IOException;
 import java.util.List;
 
 public class TestMain {
     public static void main(String[] args) throws IOException, InterruptedException {
-        List<Food> list = FoodExcelManagement.readTable();
+        List<Product> list = ProductExcelManagement.readTable();
         Console.log(list.toString());
-        FoodExcelManagement.writeTable(list);
+        ProductExcelManagement.writeTable(list);
 
         Console.log("test");
         Console.log("test");

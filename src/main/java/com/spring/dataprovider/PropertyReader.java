@@ -33,7 +33,7 @@ public class PropertyReader {
         return properties.getProperty("console_log-directory-path");
     }
 
-    public String getExcel_FoodTablePath() {
-        return properties.getProperty("excel_food-table-path");
+    public String getExcel_ProductTablePath() {
+        return properties.getProperty("excel_product-table-path");
     }
 }

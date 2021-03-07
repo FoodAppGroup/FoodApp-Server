@@ -1,25 +1,33 @@
 package com.spring.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.istack.NotNull;
 import jsonUtility.JsonBuilder;
 import lombok.Data;
 import lombok.SneakyThrows;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.HashMap;
 import java.util.Set;
 
 @Data
+@Entity
+@Table(name = "recipe")
 public class Recipe {
 
-    /*
-    Variables from the DB
-     */
+    @Id
+    @Column(name = "RECIPE_NAME")
     private String name;
-    private HashMap<String, Integer> parts;
+
+    @NotNull
+    private String recipePart;
+
+    @NotNull
+    @Column(name = "DESCRIPTION")
     private String description;
 
     private int kcal;
@@ -29,7 +37,7 @@ public class Recipe {
 
     /*
     Default Constructor with mapping to the Json values.
-     */
+
     public Recipe(
             @JsonProperty("name") String name,
             @JsonProperty("parts") HashMap<String, Integer> parts,
@@ -47,9 +55,8 @@ public class Recipe {
         this.fat = fat;
     }
 
-    /*
     Constructor with a Json String to get used from REST API.
-     */
+
     public Recipe(String jsonData) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         Recipe tempRecipe = mapper.readValue(jsonData, Recipe.class);
@@ -62,15 +69,15 @@ public class Recipe {
         this.fat = tempRecipe.getFat();
     }
 
-    /*
+
     Constructor with a ResultSet to get used from Database.
-     */
+
     public Recipe(ResultSet resultSet) throws SQLException, JsonProcessingException {
         this.name = resultSet.getString(1);
         this.parts = parseJsonToMap(resultSet.getString(2));
         this.description = resultSet.getString(3);
     }
-
+    */
     /*
     toString() generates a json
      */
