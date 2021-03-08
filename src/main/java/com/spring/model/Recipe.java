@@ -1,8 +1,5 @@
 package com.spring.model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.istack.NotNull;
 import jsonUtility.JsonBuilder;
 import lombok.Data;
 import lombok.SneakyThrows;
@@ -11,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.HashMap;
-import java.util.Set;
 
 @Data
 @Entity
@@ -20,19 +15,25 @@ import java.util.Set;
 public class Recipe {
 
     @Id
-    @Column(name = "RECIPE_NAME")
+    @Column(name = "name", unique = true)
     private String name;
 
-    @NotNull
+    @Column(name = "recipe_part", nullable = false)
     private String recipePart;
 
-    @NotNull
-    @Column(name = "DESCRIPTION")
+    @Column(name = "description", nullable = false)
     private String description;
 
-    private int kcal;
+    @Column(name = "kcal", nullable = false)
+    private int kCal;
+
+    @Column(name = "carbohydrates", nullable = false)
     private int carbohydrates;
+
+    @Column(name = "protein", nullable = false)
     private int protein;
+
+    @Column(name = "fat", nullable = false)
     private int fat;
 
     /*
@@ -85,22 +86,6 @@ public class Recipe {
     @Override
     public String toString() {
         return JsonBuilder.build(this);
-    }
-
-    /*
-    ____________________________________________________________________________________________________________________
-    Utility to calculate the nutrition values.
-     */
-
-    private HashMap<String, Integer> parseJsonToMap(String jsonData) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        HashMap<Object, Object> map = mapper.readValue(jsonData, HashMap.class);
-        Set<Object> keySet = map.keySet();
-        HashMap<String, Integer> parts = new HashMap<>();
-        for (Object key : keySet) {
-            parts.put((String) key, (Integer) (map.get(key)));
-        }
-        return parts;
     }
 
 }

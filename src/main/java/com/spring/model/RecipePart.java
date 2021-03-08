@@ -1,30 +1,26 @@
 package com.spring.model;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "recipe-part")
+@Table(name = "recipe_part")
 public class RecipePart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id", unique = true)
     private int id;
 
-    @NotNull
-    @Column(name = "RECIPE_KEY")
+    @Column(name = "recipe_name", nullable = false)
     private String recipeName;
 
-    @NotNull
-    @Column(name = "PRODUCT_KEY")
+    @Column(name = "product_name", nullable = false)
     private String productName;
 
-    @NotNull
-    @Column(name = "NUMBER")
+    @Column(name = "number", nullable = false)
     private int number;
 
     public RecipePart() {

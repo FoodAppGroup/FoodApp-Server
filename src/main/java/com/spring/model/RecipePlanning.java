@@ -9,10 +9,10 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "recipe-planning")
+@Table(name = "recipe_planning")
 public class RecipePlanning {
 
     @Id
-    @Column(name = "RECIPE_KEY")
+    @Column(name = "recipe_name", unique = true)
     private int recipeName;
 }

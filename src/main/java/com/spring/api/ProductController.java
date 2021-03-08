@@ -54,7 +54,7 @@ public class ProductController {
             Product product = new Product();
             product.setName(request.getName());
             product.setCategory(request.getCategory());
-            product.setPackageGramm(request.getPackageGramm());
+            product.setPackageGram(request.getPackageGram());
             product.setKCal(request.getKCal());
             product.setCarbohydrates(request.getCarbohydrates());
             product.setProtein(request.getProtein());

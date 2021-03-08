@@ -6,7 +6,10 @@ import com.spring.model.entity.Unit;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +50,7 @@ public class ProductExcelManagement extends ExcelManagement {
         Row row = sheet.createRow(rowIndex);
         writeCell(row, 0, product.getName(), style);
         writeCell(row, 1, product.getCategory().toString(), style);
-        writeCell(row, 2, String.valueOf(product.getPackageGramm()), style);
+        writeCell(row, 2, String.valueOf(product.getPackageGram()), style);
         writeCell(row, 3, String.valueOf(product.getKCal()), style);
         writeCell(row, 4, String.valueOf(product.getCarbohydrates()), style);
         writeCell(row, 5, String.valueOf(product.getProtein()), style);
@@ -57,7 +60,7 @@ public class ProductExcelManagement extends ExcelManagement {
 
     public static List<Product> readTable() throws IOException {
         List<Product> list = new ArrayList<>();
-        try (Workbook workbook = new XSSFWorkbook(new FileInputStream(new File(PropertyReader.getInstance().getExcel_ProductTablePath())))) {
+        try (Workbook workbook = new XSSFWorkbook(new FileInputStream(PropertyReader.getInstance().getExcel_ProductTablePath()))) {
             Sheet sheet = workbook.getSheetAt(0);
             for (int i = 1; i < sheet.getPhysicalNumberOfRows(); i++) {
                 try {
@@ -76,7 +79,7 @@ public class ProductExcelManagement extends ExcelManagement {
         Product product = new Product();
         product.setName(readCell(row.getCell(0)));
         product.setCategory(readCategory(row.getCell(1)));
-        product.setPackageGramm(readInteger(row.getCell(2)));
+        product.setPackageGram(readInteger(row.getCell(2)));
         product.setKCal(readInteger(row.getCell(3)));
         product.setCarbohydrates(readInteger(row.getCell(4)));
         product.setProtein(readInteger(row.getCell(5)));
