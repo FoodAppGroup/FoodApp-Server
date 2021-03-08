@@ -6,16 +6,16 @@ version: '3'
 # Define services
 services:
   # Database Service (Mysql)
-  fresh-planner_database:
+  freshplanner_database:
     image: mysql:8.0
     cap_add: # https://stackoverflow.com/questions/55559386/how-to-fix-mbind-operation-not-permitted-in-mysql-error-log
       - SYS_NICE
-    container_name: fresh-planner_database
+    container_name: freshplanner_database
     ports:
       - 3306:3306
     restart: always
     environment:
-      MYSQL_DATABASE: fresh-planner_database
+      MYSQL_DATABASE: freshplanner_database
       MYSQL_USER: admin
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
@@ -25,11 +25,11 @@ services:
       - backend
 
   # App backend service
-  fresh-planner_server:
+  freshplanner_server:
     # Configuration for building the docker image for the backend service
     depends_on:
-      - fresh-planner_database # This service depends on mysql. Start that first.
-    container_name: fresh-planner_server
+      - freshplanner_database # This service depends on mysql. Start that first.
+    container_name: freshplanner_server
     build:
       context: ./
       dockerfile: Dockerfile
