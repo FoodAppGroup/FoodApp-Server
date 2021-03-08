@@ -1,5 +1,6 @@
-package com.spring.dataprovider;
+package com.spring.dataprovider.databaseBackup;
 
+import com.spring.dataprovider.PropertyReader;
 import com.spring.model.Product;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -24,7 +25,7 @@ public class ProductExcelManagement extends ExcelManagement {
         CellStyle style = getContentStyle(workbook);
         style.setWrapText(true);
         for (int i = 0; i < list.size(); i++) {
-            writeFoodRow(sheet, i + 1, list.get(i), style);
+            writeRow(sheet, i + 1, list.get(i), style);
         }
 
         FileOutputStream outputStream = new FileOutputStream(PropertyReader.getInstance().getExcel_ProductTablePath());
@@ -44,7 +45,7 @@ public class ProductExcelManagement extends ExcelManagement {
         writeCell(row, 7, "Unit", style);
     }
 
-    private static void writeFoodRow(Sheet sheet, int rowIndex, Product product, CellStyle style) {
+    private static void writeRow(Sheet sheet, int rowIndex, Product product, CellStyle style) {
         Row row = sheet.createRow(rowIndex);
         writeCell(row, 0, product.getName(), style);
         writeCell(row, 1, product.getCategory().toString(), style);
@@ -62,7 +63,7 @@ public class ProductExcelManagement extends ExcelManagement {
             Sheet sheet = workbook.getSheetAt(0);
             for (int i = 1; i < sheet.getPhysicalNumberOfRows(); i++) {
                 try {
-                    list.add(readFood(sheet.getRow(i)));
+                    list.add(readRow(sheet.getRow(i)));
                 } catch (IllegalArgumentException e) {
                     e.printStackTrace();
                 }
@@ -73,7 +74,7 @@ public class ProductExcelManagement extends ExcelManagement {
         return list;
     }
 
-    private static Product readFood(Row row) throws IllegalArgumentException {
+    private static Product readRow(Row row) throws IllegalArgumentException {
         Product product = new Product();
         product.setName(readCell(row.getCell(0)));
         product.setCategory(readCategory(row.getCell(1)));
