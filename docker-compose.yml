@@ -1,19 +1,21 @@
 # Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
 # Tutorial Reference (https://www.callicoder.com/spring-boot-mysql-react-docker-compose-example/)
 
-version: '3.8'
+version: '3'
 
 # Define services
 services:
   # Database Service (Mysql)
-  mysql_database:
+  fresh-planner_database:
     image: mysql:8.0
-    container_name: mysql_database
+    cap_add: # https://stackoverflow.com/questions/55559386/how-to-fix-mbind-operation-not-permitted-in-mysql-error-log
+      - SYS_NICE
+    container_name: fresh-planner_database
     ports:
       - 3306:3306
     restart: always
     environment:
-      MYSQL_DATABASE: foodapp_database
+      MYSQL_DATABASE: fresh-planner_database
       MYSQL_USER: admin
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
@@ -23,11 +25,11 @@ services:
       - backend
 
   # App backend service
-  foodapp_server:
+  fresh-planner_server:
     # Configuration for building the docker image for the backend service
     depends_on:
-      - mysql_database # This service depends on mysql. Start that first.
-    container_name: foodapp_server
+      - fresh-planner_database # This service depends on mysql. Start that first.
+    container_name: fresh-planner_server
     build:
       context: ./
       dockerfile: Dockerfile
