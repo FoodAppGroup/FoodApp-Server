@@ -1,8 +1,6 @@
 package com.spring.dataprovider;
 
 import com.spring.model.Product;
-import com.spring.model.entity.Category;
-import com.spring.model.entity.Unit;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -88,11 +86,11 @@ public class ProductExcelManagement extends ExcelManagement {
         return product;
     }
 
-    private static Category readCategory(Cell cell) throws IllegalArgumentException {
-        return Category.getValue(readCell(cell));
+    private static Product.Category readCategory(Cell cell) throws IllegalArgumentException {
+        return Product.Category.getValue(readCell(cell));
     }
 
-    private static Unit readUnit(Cell cell) throws IllegalArgumentException {
-        return Unit.getValue(readCell(cell));
+    private static Product.Unit readUnit(Cell cell) throws IllegalArgumentException {
+        return Product.Unit.getValue(readCell(cell));
     }
 }

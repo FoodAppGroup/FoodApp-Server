@@ -1,7 +1,5 @@
 package com.spring.model;
 
-import com.spring.model.entity.Category;
-import com.spring.model.entity.Unit;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -9,13 +7,13 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Data // Lombock Data -> getter and setter
-@Entity // JPA Entity
+@Entity(name = "Product")
 @Table(name = "product") // JPA Table
 @ApiModel //Swagger Model
 public class Product {
 
     @Id //Primary Key (JPA)
-    @Column(name = "name", unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     @ApiModelProperty(value = "Name of the product.", example = "Apfel") //Swagger Model Property
     private String name;
 
@@ -51,5 +49,36 @@ public class Product {
 
     //Constructor for JPA
     public Product() {
+    }
+
+    //==================================================================================================================
+
+    public enum Category {
+        VEGETABLES, // Translation: Gemüse
+        FRUIT, // Translation: Obst
+        PASTA; // Translation: Teigwaren
+
+        public static Category getValue(String string) throws IllegalArgumentException {
+            for (Category entity : Category.class.getEnumConstants()) {
+                if (entity.toString().equalsIgnoreCase(string)) {
+                    return entity;
+                }
+            }
+            throw new IllegalArgumentException("No match with a Category-Enum: " + string);
+        }
+    }
+
+    public enum Unit {
+        GRAM,
+        PIECES;
+
+        public static Unit getValue(String string) throws IllegalArgumentException {
+            for (Unit entity : Unit.class.getEnumConstants()) {
+                if (entity.toString().equalsIgnoreCase(string)) {
+                    return entity;
+                }
+            }
+            throw new IllegalArgumentException("No match with a Unit-Enum: " + string);
+        }
     }
 }
