@@ -1,6 +1,7 @@
 package com.spring.api;
 
 import com.spring.database.ProductRepository;
+import com.spring.dataprovider.databaseBackup.ProductExcelManagement;
 import com.spring.model.Product;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,42 @@ public class ProductController {
 
             int sizeAfterStatement = productRepository.findAll().size();
             return ResponseEntity.ok("Product-Table Size: " + sizeBeforeStatement + " -> " + sizeAfterStatement);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @ApiOperation("Load the entire product table from a file.")
+    @RequestMapping(value = "/product/backup/load",
+            method = RequestMethod.POST)
+    public ResponseEntity<String> loadBackupFromFiles() {
+        try {
+            int sizeBeforeStatement = productRepository.findAll().size();
+
+            ProductExcelManagement excelManagement = new ProductExcelManagement();
+            List<Product> list = excelManagement.readTable();
+            productRepository.saveAll(list);
+
+            int sizeAfterStatement = productRepository.findAll().size();
+            return ResponseEntity.ok("Product Table Size: " + sizeBeforeStatement + " -> " + sizeAfterStatement);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @ApiOperation("Saves the entire product table to a file.")
+    @RequestMapping(value = "/product/backup/save",
+            method = RequestMethod.POST)
+    public ResponseEntity<String> saveBackupFromFiles() {
+        try {
+            int sizeBeforeStatement = productRepository.findAll().size();
+
+            ProductExcelManagement excelManagement = new ProductExcelManagement();
+            List<Product> list = productRepository.findAll();
+            excelManagement.writeTable(list);
+
+            int sizeAfterStatement = productRepository.findAll().size();
+            return ResponseEntity.ok("Product Table Size: " + sizeBeforeStatement + " -> " + sizeAfterStatement);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
