@@ -1,6 +1,7 @@
 package com.spring.model.entity;
 
 import com.spring.model.Product;
+import com.spring.model.entity.compositeKey.StockKey;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,13 +12,17 @@ import java.io.Serializable;
 @Table(name = "stock")
 public class StockEntity implements Serializable {
 
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_name", nullable = false, unique = true)
-    private Product productName;
+    @EmbeddedId
+    private StockKey id;
 
     @Column(name = "number", nullable = false)
     private Integer number;
+
+    @ManyToOne
+    @MapsId("productName")
+    @JoinColumn(name = "product_name")
+    private Product product;
+
 
     public StockEntity() {
     }
