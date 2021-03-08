@@ -12,11 +12,15 @@ import java.io.Serializable;
 public class ShoppingListEntity implements Serializable {
 
     @Id
-    @Column(name = "name", nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true)
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_name", nullable = false, unique = true)
+    @JoinColumn(name = "product_name", nullable = false)
     private Product productName;
 
     @Column(name = "number", nullable = false)
