@@ -19,7 +19,7 @@ public class Console {
     }
 
     public static void log(String content) {
-        content = content + "(" + getCurrentTimeStamp() + ")";
+        content = content + " (" + getCurrentTimeStamp() + ")";
         printToConsole(content);
         appendToFile(content);
     }

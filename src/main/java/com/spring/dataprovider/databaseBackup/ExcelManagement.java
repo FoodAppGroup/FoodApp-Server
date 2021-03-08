@@ -1,7 +1,6 @@
 package com.spring.dataprovider.databaseBackup;
 
 import com.spring.dataprovider.PropertyReader;
-import lombok.AllArgsConstructor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -11,17 +10,29 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
-@AllArgsConstructor
 abstract class ExcelManagement<T> {
 
-    protected String filePath;
-    protected String sheetName;
-    protected Map<Integer, String> header;
-    protected Map<Integer, Function<T, ?>> getterColumn;
+    protected String filePath = null;
+    protected String sheetName = null;
+    protected Map<Integer, String> header = new HashMap<>();
+
+    public ExcelManagement() {
+        initData();
+    }
+
+    /**
+     * This method should init following fields:
+     * <ul>
+     *     <li>{@link ExcelManagement#filePath}</li>
+     *     <li>{@link ExcelManagement#sheetName}</li>
+     *     <li>{@link ExcelManagement#header}</li>
+     * </ul>
+     */
+    protected abstract void initData();
 
     //=============== WRITE ============================================================================================
 
@@ -41,11 +52,7 @@ abstract class ExcelManagement<T> {
         CellStyle style = workbook.createCellStyle();
         style.setWrapText(true);
         for (int i = 0; i < list.size(); i++) {
-            Row row = sheet.createRow(i + 1);
-            T object = list.get(i);
-            getterColumn.forEach(
-                    (cellIndex, function)
-                            -> writeCell(row, cellIndex, function.apply(object).toString(), style));
+            writeRow(sheet.createRow(i + 1), list.get(i), style);
         }
         // write the file
         try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
@@ -66,7 +73,16 @@ abstract class ExcelManagement<T> {
         return headerStyle;
     }
 
-    private void writeCell(Row row, int cellIndex, String value, CellStyle style) {
+    /**
+     * This method should map the data into the cells of the row. Use {@link ExcelManagement#writeCell(Row, int, String, CellStyle)} to insert data.
+     *
+     * @param row    given row
+     * @param object given object
+     * @param style  given style
+     */
+    protected abstract void writeRow(Row row, T object, CellStyle style);
+
+    protected void writeCell(Row row, int cellIndex, String value, CellStyle style) {
         Cell cell = row.createCell(cellIndex);
         cell.setCellValue(value);
         cell.setCellStyle(style);
@@ -92,10 +108,10 @@ abstract class ExcelManagement<T> {
     }
 
     /**
-     * This method should extract to data correct and build an object. Following methods can be used for correct cell input:
+     * This method should extract to data from the cells and build an object. Following methods can be used for correct cell input:
      * <ul>
-     *     <li>{@link ExcelManagement#readInteger(Cell)}</li>
-     *     <li>{@link ExcelManagement#readCell(Cell)}</li>
+     *     <li>{@link ExcelManagement#readInt(Row, int)}</li>
+     *     <li>{@link ExcelManagement#readString(Row, int)}</li>
      * </ul>
      *
      * @param row given row
@@ -103,11 +119,12 @@ abstract class ExcelManagement<T> {
      */
     protected abstract T readRow(Row row);
 
-    protected int readInteger(Cell cell) throws IllegalArgumentException {
-        return (int) Double.parseDouble(readCell(cell));
+    protected int readInt(Row row, int cellIndex) throws IllegalArgumentException {
+        return (int) Double.parseDouble(readString(row, cellIndex));
     }
 
-    protected String readCell(Cell cell) throws IllegalArgumentException {
+    protected String readString(Row row, int cellIndex) throws IllegalArgumentException {
+        Cell cell = row.getCell(cellIndex);
         switch (cell.getCellType()) {
             case STRING:
                 return cell.getRichStringCellValue().getString();

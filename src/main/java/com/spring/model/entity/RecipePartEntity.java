@@ -13,10 +13,10 @@ import java.io.Serializable;
 public class RecipePartEntity implements Serializable {
 
     @EmbeddedId
-    private RecipePartKey id;
+    private RecipePartKey key;
 
     @Column(name = "number", nullable = false)
-    private int number;
+    private Integer number;
 
     @ManyToOne
     @MapsId("recipeName")

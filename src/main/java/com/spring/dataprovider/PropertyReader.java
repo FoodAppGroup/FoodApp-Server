@@ -1,7 +1,6 @@
 package com.spring.dataprovider;
 
-import com.spring.model.Product;
-import com.spring.model.entity.*;
+import com.spring.logging.Console;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +27,24 @@ public class PropertyReader {
         return INSTANCE;
     }
 
+    public void initTestProperties() {
+        properties.forEach((key, value) -> {
+            if (value.toString().contains("main")) {
+                properties.setProperty(key.toString(), value.toString().replace("main", "test"));
+            }
+        });
+        Console.log("PROPERTY INFO", "Initialized Test Properties: main -> test");
+    }
+
+    public void removeTestProperties() {
+        properties.forEach((key, value) -> {
+            if (value.toString().contains("test")) {
+                properties.setProperty(key.toString(), value.toString().replace("test", "main"));
+            }
+        });
+        Console.log("PROPERTY INFO", "Removed Test Properties: test -> main");
+    }
+
     public Boolean getConsole_ShowLog() {
         return Boolean.parseBoolean(properties.getProperty("Console_ShowLog"));
     }
@@ -38,25 +55,6 @@ public class PropertyReader {
 
     public Integer getExcel_ColumnWidth() {
         return Integer.parseInt(properties.getProperty("Excel_ColumnWidth"));
-    }
-
-    public <T> String getExcel_TablePath(T object) throws IOException {
-        Class<?> objectClass = object.getClass();
-        if (Product.class.equals(objectClass)) {
-            return getExcel_ProductTablePath();
-        } else if (RecipeEntity.class.equals(objectClass)) {
-            return getExcel_RecipeTablePath();
-        } else if (RecipePartEntity.class.equals(objectClass)) {
-            return getExcel_RecipePartTablePath();
-        } else if (RecipePlanningEntity.class.equals(objectClass)) {
-            return getExcel_RecipePlanningTablePath();
-        } else if (ShoppingListEntity.class.equals(objectClass)) {
-            return getExcel_ShoppingListTablePath();
-        } else if (StockEntity.class.equals(objectClass)) {
-            return getExcel_StockTablePath();
-        } else {
-            throw new IOException("No match with 'Excel_TablePath': " + objectClass.getName());
-        }
     }
 
     public String getExcel_ProductTablePath() {
@@ -81,5 +79,9 @@ public class PropertyReader {
 
     public String getExcel_StockTablePath() {
         return properties.getProperty("Excel_StockTablePath");
+    }
+
+    public Boolean getTest_DeleteTempFiles() {
+        return Boolean.parseBoolean(properties.getProperty("Test_DeleteTempFiles"));
     }
 }

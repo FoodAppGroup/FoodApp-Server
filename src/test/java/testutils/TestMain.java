@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TestMain {
     public static void main(String[] args) throws IOException, InterruptedException {
-        ProductExcelManagement pem = ProductExcelManagement.getInstance();
+        ProductExcelManagement pem = new ProductExcelManagement();
         List<Product> list = pem.readTable();
         Console.log(list.toString());
         pem.writeTable(list);

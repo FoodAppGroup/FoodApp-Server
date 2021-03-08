@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class ShoppingListEntity implements Serializable {
 
     @EmbeddedId
-    private ShoppingListKey id;
+    private ShoppingListKey key;
 
     @Column(name = "number", nullable = false)
     private Integer number;

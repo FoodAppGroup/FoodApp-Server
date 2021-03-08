@@ -18,16 +18,16 @@ public class RecipeEntity {
     private String description;
 
     @Column(name = "kcal", nullable = false)
-    private int kCal;
+    private Integer kCal;
 
     @Column(name = "carbohydrates", nullable = false)
-    private int carbohydrates;
+    private Integer carbohydrates;
 
     @Column(name = "protein", nullable = false)
-    private int protein;
+    private Integer protein;
 
     @Column(name = "fat", nullable = false)
-    private int fat;
+    private Integer fat;
 
     @OneToMany(mappedBy = "recipe")
     private Set<RecipePartEntity> recipeParts;

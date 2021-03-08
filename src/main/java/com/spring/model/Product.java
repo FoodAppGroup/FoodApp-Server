@@ -51,22 +51,6 @@ public class Product {
     public Product() {
     }
 
-    public void setUnit(Unit unit) {
-        this.unit = unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = Unit.getValue(unit);
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public void setCategory(String category) {
-        this.category = Category.getValue(category);
-    }
-
     //==================================================================================================================
 
     public enum Category {

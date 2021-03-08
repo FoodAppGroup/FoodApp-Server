@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class StockEntity implements Serializable {
 
     @EmbeddedId
-    private StockKey id;
+    private StockKey key;
 
     @Column(name = "number", nullable = false)
     private Integer number;

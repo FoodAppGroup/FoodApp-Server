@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class RecipePlanningEntity implements Serializable {
 
     @EmbeddedId
-    private RecipePlanningKey id;
+    private RecipePlanningKey key;
 
     @ManyToOne
     @MapsId("recipeName")
