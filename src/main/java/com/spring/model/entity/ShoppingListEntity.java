@@ -15,7 +15,7 @@ public class ShoppingListEntity implements Serializable {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_name", nullable = false, unique = true)
     private Product productName;
 

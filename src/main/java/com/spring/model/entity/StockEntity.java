@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class StockEntity implements Serializable {
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_name", nullable = false, unique = true)
     private Product productName;
 

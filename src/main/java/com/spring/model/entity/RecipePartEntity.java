@@ -16,11 +16,11 @@ public class RecipePartEntity implements Serializable {
     @Column(name = "id", nullable = false, unique = true)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY) //JPA Foreign Key
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //JPA Foreign Key
     @JoinColumn(name = "recipe_name", nullable = false) //JPA Foreign Key
     private RecipeEntity recipeName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_name", nullable = false)
     private Product productName;
 
