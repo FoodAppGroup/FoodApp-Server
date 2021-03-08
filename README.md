@@ -16,7 +16,7 @@ Declared in the [docker-compose.yml](docker-compose.yml).
 
 * Host: `localhost`
 * Port: `3306`
-* Database: `foodapp_database`
-* Url: `jdbc:mysql://localhost:3306/foodapp_database`
+* Database: `fresh-planner_database`
+* Url: `jdbc:mysql://localhost:3306/fresh-planner_database`
 * Username: `root`
 * Password: `password`

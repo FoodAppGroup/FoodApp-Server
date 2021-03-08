@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.spring</groupId>
-    <artifactId>FoodApp-Server</artifactId>
+    <artifactId>FreshPlanner-Server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>FoodApp-Server</name>
-    <description>Project to manage the database for the FoodApp.</description>
+    <name>FreshPlanner-Server</name>
+    <description>Project to manage the database for the Fresh-Planner.</description>
 
     <properties>
         <java.version>11</java.version>
