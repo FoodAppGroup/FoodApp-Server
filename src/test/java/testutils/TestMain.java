@@ -9,9 +9,10 @@ import java.util.List;
 
 public class TestMain {
     public static void main(String[] args) throws IOException, InterruptedException {
-        List<Product> list = ProductExcelManagement.readTable();
+        ProductExcelManagement pem = ProductExcelManagement.getInstance();
+        List<Product> list = pem.readTable();
         Console.log(list.toString());
-        ProductExcelManagement.writeTable(list);
+        pem.writeTable(list);
 
         Console.log("test");
         Console.log("test");

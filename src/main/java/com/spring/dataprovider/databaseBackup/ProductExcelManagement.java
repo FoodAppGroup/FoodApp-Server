@@ -2,79 +2,49 @@ package com.spring.dataprovider.databaseBackup;
 
 import com.spring.dataprovider.PropertyReader;
 import com.spring.model.Product;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
-public class ProductExcelManagement extends ExcelManagement {
+public class ProductExcelManagement extends ExcelManagement<Product> {
 
-    public static void writeTable(List<Product> list) throws IOException {
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("Foods");
-        sheet.setColumnWidth(0, 6000);
-        sheet.setColumnWidth(1, 4000);
-
-        writeHeader(sheet, getHeaderStyle(workbook));
-
-        CellStyle style = getContentStyle(workbook);
-        style.setWrapText(true);
-        for (int i = 0; i < list.size(); i++) {
-            writeRow(sheet, i + 1, list.get(i), style);
-        }
-
-        FileOutputStream outputStream = new FileOutputStream(PropertyReader.getInstance().getExcel_ProductTablePath());
-        workbook.write(outputStream);
-        workbook.close();
+    private ProductExcelManagement(String filePath, String sheetName, Map<Integer, String> header, Map<Integer, Function<Product, ?>> getterColumn) {
+        super(filePath, sheetName, header, getterColumn);
     }
 
-    private static void writeHeader(Sheet sheet, CellStyle style) {
-        Row row = sheet.createRow(0);
-        writeCell(row, 0, "Name", style);
-        writeCell(row, 1, "Category", style);
-        writeCell(row, 2, "PackageGram", style);
-        writeCell(row, 3, "kCal", style);
-        writeCell(row, 4, "Carbohydrates", style);
-        writeCell(row, 5, "Protein", style);
-        writeCell(row, 6, "Fat", style);
-        writeCell(row, 7, "Unit", style);
+    public static ProductExcelManagement getInstance() {
+        String filePath = PropertyReader.getInstance().getExcel_ProductTablePath();
+        String sheetName = "Products";
+        Map<Integer, String> header = new HashMap<>();
+        header.put(0, "Name");
+        header.put(1, "Category");
+        header.put(2, "PackageGram");
+        header.put(3, "kCal");
+        header.put(4, "Carbohydrates");
+        header.put(5, "Protein");
+        header.put(6, "Fat");
+        header.put(7, "Unit");
+
+        Map<Integer, Function<Product, ?>> getterColumn = new HashMap<>();
+        getterColumn.put(0, Product::getName);
+        getterColumn.put(1, Product::getCategory);
+        getterColumn.put(2, Product::getPackageGram);
+        getterColumn.put(3, Product::getKCal);
+        getterColumn.put(4, Product::getCarbohydrates);
+        getterColumn.put(5, Product::getProtein);
+        getterColumn.put(6, Product::getFat);
+        getterColumn.put(7, Product::getUnit);
+
+        Map<Integer, Function<Product, ?>> setterColumn = new HashMap<>();
+        return new ProductExcelManagement(filePath, sheetName, header, getterColumn);
+
     }
 
-    private static void writeRow(Sheet sheet, int rowIndex, Product product, CellStyle style) {
-        Row row = sheet.createRow(rowIndex);
-        writeCell(row, 0, product.getName(), style);
-        writeCell(row, 1, product.getCategory().toString(), style);
-        writeCell(row, 2, String.valueOf(product.getPackageGram()), style);
-        writeCell(row, 3, String.valueOf(product.getKCal()), style);
-        writeCell(row, 4, String.valueOf(product.getCarbohydrates()), style);
-        writeCell(row, 5, String.valueOf(product.getProtein()), style);
-        writeCell(row, 6, String.valueOf(product.getFat()), style);
-        writeCell(row, 7, product.getUnit().toString(), style);
-    }
-
-    public static List<Product> readTable() throws IOException {
-        List<Product> list = new ArrayList<>();
-        try (Workbook workbook = new XSSFWorkbook(new FileInputStream(PropertyReader.getInstance().getExcel_ProductTablePath()))) {
-            Sheet sheet = workbook.getSheetAt(0);
-            for (int i = 1; i < sheet.getPhysicalNumberOfRows(); i++) {
-                try {
-                    list.add(readRow(sheet.getRow(i)));
-                } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    private static Product readRow(Row row) throws IllegalArgumentException {
+    @Override
+    protected Product readRow(Row row) throws IllegalArgumentException {
         Product product = new Product();
         product.setName(readCell(row.getCell(0)));
         product.setCategory(readCategory(row.getCell(1)));
@@ -87,11 +57,11 @@ public class ProductExcelManagement extends ExcelManagement {
         return product;
     }
 
-    private static Product.Category readCategory(Cell cell) throws IllegalArgumentException {
+    private Product.Category readCategory(Cell cell) throws IllegalArgumentException {
         return Product.Category.getValue(readCell(cell));
     }
 
-    private static Product.Unit readUnit(Cell cell) throws IllegalArgumentException {
+    private Product.Unit readUnit(Cell cell) throws IllegalArgumentException {
         return Product.Unit.getValue(readCell(cell));
     }
 }

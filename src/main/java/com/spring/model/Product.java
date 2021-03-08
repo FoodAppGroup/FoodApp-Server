@@ -24,23 +24,23 @@ public class Product {
 
     @Column(name = "package_gram", nullable = false)
     @ApiModelProperty(value = "Gram in one package of the store.", example = "500")
-    private int packageGram;
+    private Integer packageGram;
 
     @Column(name = "kcal", nullable = false)
     @ApiModelProperty(value = "kCal per 100g", example = "400")
-    private int kCal;
+    private Integer kCal;
 
     @Column(name = "carbohydrates", nullable = false)
     @ApiModelProperty(value = "Carbohydrates per 100g", example = "20")
-    private int carbohydrates;
+    private Integer carbohydrates;
 
     @Column(name = "protein", nullable = false)
     @ApiModelProperty(value = "Protein per 100g", example = "10")
-    private int protein;
+    private Integer protein;
 
     @Column(name = "fat", nullable = false)
     @ApiModelProperty(value = "Fat per 100g", example = "10")
-    private int fat;
+    private Integer fat;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "unit", nullable = false)
@@ -49,6 +49,22 @@ public class Product {
 
     //Constructor for JPA
     public Product() {
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = Unit.getValue(unit);
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setCategory(String category) {
+        this.category = Category.getValue(category);
     }
 
     //==================================================================================================================

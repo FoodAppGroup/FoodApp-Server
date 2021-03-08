@@ -1,4 +1,6 @@
 package com.spring.dataprovider.databaseBackup;
 
-public class ShoppingListExcelManagement {
+public class ShoppingListExcelManagement //extends ExcelManagement<ShoppingListEntity>
+{
+
 }
