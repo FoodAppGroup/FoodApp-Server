@@ -1,4 +1,4 @@
-package com.spring.api;
+package com.spring.controller;
 
 import com.spring.database.ShoppingListRepository;
 import com.spring.database.backup.ShoppingListExcelManagement;

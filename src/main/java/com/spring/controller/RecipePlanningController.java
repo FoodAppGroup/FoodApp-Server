@@ -1,4 +1,4 @@
-package com.spring.api;
+package com.spring.controller;
 
 import com.spring.database.RecipePlanningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
