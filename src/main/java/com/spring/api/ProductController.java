@@ -70,10 +70,12 @@ public class ProductController {
         }
     }
 
+    //=============== BACKUP ===========================================================================================
+
     @ApiOperation("Load the entire product table from a file.")
     @RequestMapping(value = "/product/backup/load",
             method = RequestMethod.POST)
-    public ResponseEntity<String> loadBackupFromFiles() {
+    public ResponseEntity<String> loadBackupFromFile() {
         try {
             RepoBackup<Product, ProductRepository, ProductExcelManagement> repoBackup
                     = new RepoBackup<>(productRepository, new ProductExcelManagement());
@@ -86,7 +88,7 @@ public class ProductController {
     @ApiOperation("Saves the entire product table to a file.")
     @RequestMapping(value = "/product/backup/save",
             method = RequestMethod.POST)
-    public ResponseEntity<String> saveBackupFromFiles() {
+    public ResponseEntity<String> saveBackupToFile() {
         try {
             RepoBackup<Product, ProductRepository, ProductExcelManagement> repoBackup
                     = new RepoBackup<>(productRepository, new ProductExcelManagement());
