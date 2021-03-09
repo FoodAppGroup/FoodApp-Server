@@ -2,7 +2,6 @@ package com.spring.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,45 +9,44 @@ import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@ApiModel
 @Entity(name = "Product")
-@Table(name = "product") // JPA Table
-@ApiModel //Swagger Model
+@Table(name = "product")
 public class Product {
 
     @Id //Primary Key (JPA)
-    @Column(name = "name", nullable = false, unique = true)
     @ApiModelProperty(value = "Name of the product.", example = "Apfel") //Swagger Model Property
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
+    @ApiModelProperty(value = "Category in the store.", example = "FRUIT") // Swagger Model Property
     @Enumerated(EnumType.STRING) // JPA save Enum as string
     @Column(name = "category", nullable = false)
-    @ApiModelProperty(value = "Category in the store.", example = "FRUIT") // Swagger Model Property
     private Category category;
 
-    @Column(name = "package_gram", nullable = false)
     @ApiModelProperty(value = "Gram in one package of the store.", example = "500")
+    @Column(name = "package_gram", nullable = false)
     private Integer packageGram;
 
-    @Column(name = "kcal", nullable = false)
     @ApiModelProperty(value = "kCal per 100g", example = "400")
+    @Column(name = "kcal", nullable = false)
     private Integer kCal;
 
-    @Column(name = "carbohydrates", nullable = false)
     @ApiModelProperty(value = "Carbohydrates per 100g", example = "20")
+    @Column(name = "carbohydrates", nullable = false)
     private Integer carbohydrates;
 
-    @Column(name = "protein", nullable = false)
     @ApiModelProperty(value = "Protein per 100g", example = "10")
+    @Column(name = "protein", nullable = false)
     private Integer protein;
 
-    @Column(name = "fat", nullable = false)
     @ApiModelProperty(value = "Fat per 100g", example = "10")
+    @Column(name = "fat", nullable = false)
     private Integer fat;
 
+    @ApiModelProperty(value = "Unit of the product.", example = "GRAM")
     @Enumerated(EnumType.STRING)
     @Column(name = "unit", nullable = false)
-    @ApiModelProperty(value = "Unit of the product.", example = "GRAM")
     private Unit unit;
 
     //==================================================================================================================

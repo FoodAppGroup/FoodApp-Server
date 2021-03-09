@@ -19,6 +19,6 @@ public class RepoLog<T extends JpaRepository<?, ?>> {
      * @return message with the changed size of the repository from object creation to this point.
      */
     public String getChangedSize() {
-        return repo.getClass().getName() + "-Table-Size: " + repoSizeBeforeRequest + " -> " + repo.findAll().size();
+        return "Table-Size: " + repoSizeBeforeRequest + " -> " + repo.findAll().size();
     }
 }

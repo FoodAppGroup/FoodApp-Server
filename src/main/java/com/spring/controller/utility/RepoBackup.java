@@ -25,10 +25,9 @@ public class RepoBackup<P, T extends JpaRepository<P, ?>, S extends ExcelManagem
      * @throws IOException conversion issues
      */
     public String saveBackup() throws IOException {
-        RepoLog<T> repoLog = new RepoLog<>(repo);
         List<P> list = repo.findAll();
         excel.writeTable(list);
-        return repoLog.getChangedSize();
+        return list.size() + " rows saved";
     }
 
     /**
