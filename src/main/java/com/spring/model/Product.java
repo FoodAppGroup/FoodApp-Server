@@ -2,11 +2,15 @@ package com.spring.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data // Lombock Data -> getter and setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "Product")
 @Table(name = "product") // JPA Table
 @ApiModel //Swagger Model
@@ -46,10 +50,6 @@ public class Product {
     @Column(name = "unit", nullable = false)
     @ApiModelProperty(value = "Unit of the product.", example = "GRAM")
     private Unit unit;
-
-    //Constructor for JPA
-    public Product() {
-    }
 
     //==================================================================================================================
 

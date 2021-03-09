@@ -1,11 +1,15 @@
 package com.spring.model.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "Recipe")
 @Table(name = "recipe")
 public class RecipeEntity {
@@ -31,8 +35,4 @@ public class RecipeEntity {
 
     @OneToMany(mappedBy = "recipe")
     private Set<RecipePartEntity> recipeParts;
-
-
-    public RecipeEntity() {
-    }
 }
