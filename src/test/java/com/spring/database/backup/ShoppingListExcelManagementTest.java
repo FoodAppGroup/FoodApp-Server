@@ -1,7 +1,8 @@
-package com.spring.dataprovider.databaseBackup;
+package com.spring.database.backup;
 
 import com.spring.dataprovider.PropertyReader;
-import com.spring.model.Product;
+import com.spring.model.entity.ShoppingListEntity;
+import com.spring.model.entity.compositeKey.ShoppingListKey;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -13,27 +14,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class ProductExcelManagementTest {
+class ShoppingListExcelManagementTest {
 
-    private static final Product product = new Product();
-    private static final List<Product> list = new ArrayList<>();
-    private static ProductExcelManagement excelManagement;
+    private static final ShoppingListEntity shoppingList = new ShoppingListEntity();
+    private static final List<ShoppingListEntity> list = new ArrayList<>();
+    private static ShoppingListExcelManagement excelManagement;
 
     @BeforeAll
     static void setUp() {
         PropertyReader.getInstance().initTestProperties();
-        excelManagement = new ProductExcelManagement();
+        excelManagement = new ShoppingListExcelManagement();
 
-        product.setName("Nudeln");
-        product.setCategory(Product.Category.PASTA);
-        product.setPackageGram(500);
-        product.setKCal(499);
-        product.setCarbohydrates(60);
-        product.setProtein(7);
-        product.setFat(3);
-        product.setUnit(Product.Unit.GRAM);
+        shoppingList.setKey(new ShoppingListKey("testListe", "Nudeln"));
+        shoppingList.setNumber(1);
 
-        list.add(product);
+        list.add(shoppingList);
     }
 
     @AfterAll
@@ -51,7 +46,7 @@ class ProductExcelManagementTest {
     @Test
     @Order(2)
     void read() throws IOException {
-        List<Product> result = excelManagement.readTable();
+        List<ShoppingListEntity> result = excelManagement.readTable();
         assertEquals(list.get(0), result.get(0));
     }
 
@@ -59,7 +54,7 @@ class ProductExcelManagementTest {
     @Order(3)
     void removeFile() {
         if (PropertyReader.getInstance().getTest_DeleteTempFiles()) {
-            File file = new File(PropertyReader.getInstance().getExcel_ProductTablePath());
+            File file = new File(PropertyReader.getInstance().getExcel_ShoppingListTablePath());
             assertTrue(file.delete());
         }
     }

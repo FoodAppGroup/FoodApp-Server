@@ -1,7 +1,7 @@
 package com.spring.api;
 
 import com.spring.database.StockRepository;
-import com.spring.dataprovider.databaseBackup.StockExcelManagement;
+import com.spring.database.backup.StockExcelManagement;
 import com.spring.model.entity.StockEntity;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

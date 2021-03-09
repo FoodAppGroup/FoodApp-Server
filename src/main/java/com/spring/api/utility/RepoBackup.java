@@ -1,6 +1,6 @@
 package com.spring.api.utility;
 
-import com.spring.dataprovider.databaseBackup.ExcelManagement;
+import com.spring.database.backup.ExcelManagement;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 

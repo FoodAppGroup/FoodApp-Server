@@ -1,7 +1,7 @@
 package com.spring.api;
 
 import com.spring.database.ShoppingListRepository;
-import com.spring.dataprovider.databaseBackup.ShoppingListExcelManagement;
+import com.spring.database.backup.ShoppingListExcelManagement;
 import com.spring.model.entity.ShoppingListEntity;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

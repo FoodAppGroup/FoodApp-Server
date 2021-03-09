@@ -1,8 +1,8 @@
-package com.spring.dataprovider.databaseBackup;
+package com.spring.database.backup;
 
 import com.spring.dataprovider.PropertyReader;
-import com.spring.model.entity.ShoppingListEntity;
-import com.spring.model.entity.compositeKey.ShoppingListKey;
+import com.spring.model.entity.RecipePlanningEntity;
+import com.spring.model.entity.compositeKey.RecipePlanningKey;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -14,21 +14,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class ShoppingListExcelManagementTest {
+class RecipePlanningExcelManagementTest {
 
-    private static final ShoppingListEntity shoppingList = new ShoppingListEntity();
-    private static final List<ShoppingListEntity> list = new ArrayList<>();
-    private static ShoppingListExcelManagement excelManagement;
+    private static final RecipePlanningEntity recipePlanning = new RecipePlanningEntity();
+    private static final List<RecipePlanningEntity> list = new ArrayList<>();
+    private static RecipePlanningExcelManagement excelManagement;
 
     @BeforeAll
     static void setUp() {
         PropertyReader.getInstance().initTestProperties();
-        excelManagement = new ShoppingListExcelManagement();
+        excelManagement = new RecipePlanningExcelManagement();
 
-        shoppingList.setKey(new ShoppingListKey("testListe", "Nudeln"));
-        shoppingList.setNumber(1);
+        recipePlanning.setKey(new RecipePlanningKey("Nudeln kochen"));
 
-        list.add(shoppingList);
+        list.add(recipePlanning);
     }
 
     @AfterAll
@@ -46,7 +45,7 @@ class ShoppingListExcelManagementTest {
     @Test
     @Order(2)
     void read() throws IOException {
-        List<ShoppingListEntity> result = excelManagement.readTable();
+        List<RecipePlanningEntity> result = excelManagement.readTable();
         assertEquals(list.get(0), result.get(0));
     }
 
@@ -54,7 +53,7 @@ class ShoppingListExcelManagementTest {
     @Order(3)
     void removeFile() {
         if (PropertyReader.getInstance().getTest_DeleteTempFiles()) {
-            File file = new File(PropertyReader.getInstance().getExcel_ShoppingListTablePath());
+            File file = new File(PropertyReader.getInstance().getExcel_RecipePlanningTablePath());
             assertTrue(file.delete());
         }
     }

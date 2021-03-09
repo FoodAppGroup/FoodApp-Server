@@ -1,7 +1,8 @@
-package com.spring.dataprovider.databaseBackup;
+package com.spring.database.backup;
 
 import com.spring.dataprovider.PropertyReader;
-import com.spring.model.entity.RecipeEntity;
+import com.spring.model.entity.RecipePartEntity;
+import com.spring.model.entity.compositeKey.RecipePartKey;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -13,25 +14,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class RecipeExcelManagementTest {
+class RecipePartExcelManagementTest {
 
-    private static final RecipeEntity recipe = new RecipeEntity();
-    private static final List<RecipeEntity> list = new ArrayList<>();
-    private static RecipeExcelManagement excelManagement;
+    private static final RecipePartEntity recipePart = new RecipePartEntity();
+    private static final List<RecipePartEntity> list = new ArrayList<>();
+    private static RecipePartExcelManagement excelManagement;
 
     @BeforeAll
     static void setUp() {
         PropertyReader.getInstance().initTestProperties();
-        excelManagement = new RecipeExcelManagement();
+        excelManagement = new RecipePartExcelManagement();
 
-        recipe.setName("Nudeln kochen");
-        recipe.setDescription("Nudeln kochen und warten");
-        recipe.setKCal(811);
-        recipe.setCarbohydrates(88);
-        recipe.setProtein(11);
-        recipe.setFat(7);
+        recipePart.setKey(new RecipePartKey("Nudeln kochen", "Nudeln"));
+        recipePart.setNumber(2);
 
-        list.add(recipe);
+        list.add(recipePart);
     }
 
     @AfterAll
@@ -49,7 +46,7 @@ class RecipeExcelManagementTest {
     @Test
     @Order(2)
     void read() throws IOException {
-        List<RecipeEntity> result = excelManagement.readTable();
+        List<RecipePartEntity> result = excelManagement.readTable();
         assertEquals(list.get(0), result.get(0));
     }
 
@@ -57,7 +54,7 @@ class RecipeExcelManagementTest {
     @Order(3)
     void removeFile() {
         if (PropertyReader.getInstance().getTest_DeleteTempFiles()) {
-            File file = new File(PropertyReader.getInstance().getExcel_RecipeTablePath());
+            File file = new File(PropertyReader.getInstance().getExcel_RecipePartTablePath());
             assertTrue(file.delete());
         }
     }

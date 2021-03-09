@@ -1,4 +1,4 @@
-package com.spring.dataprovider.databaseBackup;
+package com.spring.database.backup;
 
 import com.spring.dataprovider.PropertyReader;
 import com.spring.model.entity.StockEntity;

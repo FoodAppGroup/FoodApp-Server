@@ -1,8 +1,7 @@
-package com.spring.dataprovider.databaseBackup;
+package com.spring.database.backup;
 
 import com.spring.dataprovider.PropertyReader;
-import com.spring.model.entity.StockEntity;
-import com.spring.model.entity.compositeKey.StockKey;
+import com.spring.model.entity.RecipeEntity;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -14,21 +13,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class StockExcelManagementTest {
+class RecipeExcelManagementTest {
 
-    private static final StockEntity stock = new StockEntity();
-    private static final List<StockEntity> list = new ArrayList<>();
-    private static StockExcelManagement excelManagement;
+    private static final RecipeEntity recipe = new RecipeEntity();
+    private static final List<RecipeEntity> list = new ArrayList<>();
+    private static RecipeExcelManagement excelManagement;
 
     @BeforeAll
     static void setUp() {
         PropertyReader.getInstance().initTestProperties();
-        excelManagement = new StockExcelManagement();
+        excelManagement = new RecipeExcelManagement();
 
-        stock.setKey(new StockKey("Nudeln"));
-        stock.setNumber(20);
+        recipe.setName("Nudeln kochen");
+        recipe.setDescription("Nudeln kochen und warten");
+        recipe.setKCal(811);
+        recipe.setCarbohydrates(88);
+        recipe.setProtein(11);
+        recipe.setFat(7);
 
-        list.add(stock);
+        list.add(recipe);
     }
 
     @AfterAll
@@ -46,7 +49,7 @@ class StockExcelManagementTest {
     @Test
     @Order(2)
     void read() throws IOException {
-        List<StockEntity> result = excelManagement.readTable();
+        List<RecipeEntity> result = excelManagement.readTable();
         assertEquals(list.get(0), result.get(0));
     }
 
@@ -54,7 +57,7 @@ class StockExcelManagementTest {
     @Order(3)
     void removeFile() {
         if (PropertyReader.getInstance().getTest_DeleteTempFiles()) {
-            File file = new File(PropertyReader.getInstance().getExcel_StockTablePath());
+            File file = new File(PropertyReader.getInstance().getExcel_RecipeTablePath());
             assertTrue(file.delete());
         }
     }
