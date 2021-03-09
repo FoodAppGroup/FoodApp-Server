@@ -1,5 +1,7 @@
 package com.spring.api;
 
+import com.spring.api.utility.RepoBackup;
+import com.spring.api.utility.RepoLog;
 import com.spring.database.ProductRepository;
 import com.spring.dataprovider.databaseBackup.ProductExcelManagement;
 import com.spring.model.Product;
@@ -49,9 +51,8 @@ public class ProductController {
     @RequestMapping(value = "/product/add",
             method = RequestMethod.POST)
     public ResponseEntity<String> addProduct(@RequestBody Product request) {
+        RepoLog<ProductRepository> repoLog = new RepoLog<>(productRepository);
         try {
-            int sizeBeforeStatement = productRepository.findAll().size();
-
             Product product = new Product();
             product.setName(request.getName());
             product.setCategory(request.getCategory());
@@ -63,8 +64,7 @@ public class ProductController {
             product.setUnit(request.getUnit());
             productRepository.save(product);
 
-            int sizeAfterStatement = productRepository.findAll().size();
-            return ResponseEntity.ok("Product-Table Size: " + sizeBeforeStatement + " -> " + sizeAfterStatement);
+            return ResponseEntity.ok(repoLog.getChangedSize());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -75,14 +75,9 @@ public class ProductController {
             method = RequestMethod.POST)
     public ResponseEntity<String> loadBackupFromFiles() {
         try {
-            int sizeBeforeStatement = productRepository.findAll().size();
-
-            ProductExcelManagement excelManagement = new ProductExcelManagement();
-            List<Product> list = excelManagement.readTable();
-            productRepository.saveAll(list);
-
-            int sizeAfterStatement = productRepository.findAll().size();
-            return ResponseEntity.ok("Product Table Size: " + sizeBeforeStatement + " -> " + sizeAfterStatement);
+            RepoBackup<Product, ProductRepository, ProductExcelManagement> repoBackup
+                    = new RepoBackup<>(productRepository, new ProductExcelManagement());
+            return ResponseEntity.ok(repoBackup.loadBackup());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -93,15 +88,11 @@ public class ProductController {
             method = RequestMethod.POST)
     public ResponseEntity<String> saveBackupFromFiles() {
         try {
-            int sizeBeforeStatement = productRepository.findAll().size();
-
-            ProductExcelManagement excelManagement = new ProductExcelManagement();
-            List<Product> list = productRepository.findAll();
-            excelManagement.writeTable(list);
-
-            int sizeAfterStatement = productRepository.findAll().size();
-            return ResponseEntity.ok("Product Table Size: " + sizeBeforeStatement + " -> " + sizeAfterStatement);
+            RepoBackup<Product, ProductRepository, ProductExcelManagement> repoBackup
+                    = new RepoBackup<>(productRepository, new ProductExcelManagement());
+            return ResponseEntity.ok(repoBackup.saveBackup());
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

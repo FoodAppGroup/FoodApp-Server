@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-abstract class ExcelManagement<T> {
+public abstract class ExcelManagement<T> {
 
     protected String filePath = null;
     protected String sheetName = null;
