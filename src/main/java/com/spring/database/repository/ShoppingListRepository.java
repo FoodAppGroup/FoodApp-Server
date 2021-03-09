@@ -1,4 +1,4 @@
-package com.spring.database;
+package com.spring.database.repository;
 
 import com.spring.model.entity.ShoppingListEntity;
 import com.spring.model.entity.compositeKey.ShoppingListKey;

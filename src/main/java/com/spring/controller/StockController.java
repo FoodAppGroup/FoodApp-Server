@@ -1,9 +1,9 @@
 package com.spring.controller;
 
 import com.spring.controller.utility.RepoBackup;
-import com.spring.database.StockRepository;
 import com.spring.database.backup.StockExcelManagement;
-import com.spring.model.entity.StockEntity;
+import com.spring.database.repository.StockRepository;
+import com.spring.model.Stock;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public class StockController {
             method = RequestMethod.POST)
     public ResponseEntity<String> loadBackupFromFile() {
         try {
-            RepoBackup<StockEntity, StockRepository, StockExcelManagement> repoBackup
+            RepoBackup<Stock, StockRepository, StockExcelManagement> repoBackup
                     = new RepoBackup<>(stockRepository, new StockExcelManagement());
             return ResponseEntity.ok(repoBackup.loadBackup());
         } catch (Exception e) {
@@ -39,7 +39,7 @@ public class StockController {
             method = RequestMethod.POST)
     public ResponseEntity<String> saveBackupToFile() {
         try {
-            RepoBackup<StockEntity, StockRepository, StockExcelManagement> repoBackup
+            RepoBackup<Stock, StockRepository, StockExcelManagement> repoBackup
                     = new RepoBackup<>(stockRepository, new StockExcelManagement());
             return ResponseEntity.ok(repoBackup.saveBackup());
         } catch (Exception e) {

@@ -2,8 +2,8 @@ package com.spring.controller;
 
 import com.spring.controller.utility.RepoBackup;
 import com.spring.controller.utility.RepoLog;
-import com.spring.database.ProductRepository;
 import com.spring.database.backup.ProductExcelManagement;
+import com.spring.database.repository.ProductRepository;
 import com.spring.model.Product;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

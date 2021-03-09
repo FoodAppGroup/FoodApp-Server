@@ -1,8 +1,7 @@
 package com.spring.database.backup;
 
 import com.spring.dataprovider.PropertyReader;
-import com.spring.model.entity.StockEntity;
-import com.spring.model.entity.compositeKey.StockKey;
+import com.spring.model.Stock;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -16,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StockExcelManagementTest {
 
-    private static final StockEntity stock = new StockEntity();
-    private static final List<StockEntity> list = new ArrayList<>();
+    private static final Stock stock = new Stock();
+    private static final List<Stock> list = new ArrayList<>();
     private static StockExcelManagement excelManagement;
 
     @BeforeAll
@@ -25,7 +24,7 @@ class StockExcelManagementTest {
         PropertyReader.getInstance().initTestProperties();
         excelManagement = new StockExcelManagement();
 
-        stock.setKey(new StockKey("Nudeln"));
+        //stock.setKey(new StockKey("Nudeln"));
         stock.setNumber(20);
 
         list.add(stock);
@@ -46,7 +45,7 @@ class StockExcelManagementTest {
     @Test
     @Order(2)
     void read() throws IOException {
-        List<StockEntity> result = excelManagement.readTable();
+        List<Stock> result = excelManagement.readTable();
         assertEquals(list.get(0), result.get(0));
     }
 

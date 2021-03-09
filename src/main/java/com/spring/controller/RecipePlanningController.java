@@ -1,6 +1,6 @@
 package com.spring.controller;
 
-import com.spring.database.RecipePlanningRepository;
+import com.spring.database.repository.RecipePlanningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
