@@ -35,6 +35,22 @@ public class ProductDatabase {
         return productRepository.save(product);
     }
 
+    public Product updateElement(Product product) throws IllegalArgumentException {
+        if (productRepository.existsById(product.getName())) {
+            return productRepository.save(product);
+        } else {
+            throw new IllegalArgumentException("Product does not exist: '" + product.getName() + "'");
+        }
+    }
+
+    public Product removeElement(String productName) throws IllegalArgumentException {
+        Product product = getElement(productName);
+        productRepository.delete(product);
+        return product;
+    }
+
+    //==================================================================================================================
+
     public List<Product> saveBackup() throws IOException {
         RepoBackup<Product, ProductRepository, ProductExcelManagement> repoBackup
                 = new RepoBackup<>(productRepository, new ProductExcelManagement());
