@@ -8,14 +8,14 @@ import java.io.InputStreamReader;
 
 public class JsonFileReader {
     /**
-     * Reads a file from resources
+     * Reads a resourceFilePath from resources
      *
-     * @param file path starting at src/test/resources
+     * @param resourceFilePath path starting at src/test/resources
      * @return content (json) as String
-     * @throws IOException file not found
+     * @throws IOException resourceFilePath not found
      */
-    public static String readFile(String file) throws IOException {
-        InputStream stream = JsonFileReader.class.getClassLoader().getResourceAsStream(file);
+    public static String readFile(String resourceFilePath) throws IOException {
+        InputStream stream = JsonFileReader.class.getClassLoader().getResourceAsStream(resourceFilePath);
         assert stream != null;
         return IOUtils.toString(new InputStreamReader(stream));
     }

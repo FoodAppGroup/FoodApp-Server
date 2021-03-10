@@ -19,32 +19,32 @@ public class Product {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @ApiModelProperty(value = "Category in the store.", example = "FRUIT")
+    @ApiModelProperty(value = "Category in the store.", example = "FRUIT", position = 1)
     @Enumerated(EnumType.STRING) // JPA save Enum as string
     @Column(name = "category", nullable = false)
     private Category category;
 
-    @ApiModelProperty(value = "Gram in one package of the store.", example = "500")
+    @ApiModelProperty(value = "Gram in one package of the store.", example = "500", position = 2)
     @Column(name = "package_gram", nullable = false)
     private Integer packageGram;
 
-    @ApiModelProperty(value = "kCal per 100g", example = "400")
+    @ApiModelProperty(value = "kCal per 100g", example = "400", position = 3)
     @Column(name = "kcal", nullable = false)
     private Integer kCal;
 
-    @ApiModelProperty(value = "Carbohydrates per 100g", example = "20")
+    @ApiModelProperty(value = "Carbohydrates per 100g", example = "20", position = 4)
     @Column(name = "carbohydrates", nullable = false)
     private Integer carbohydrates;
 
-    @ApiModelProperty(value = "Protein per 100g", example = "10")
+    @ApiModelProperty(value = "Protein per 100g", example = "10", position = 5)
     @Column(name = "protein", nullable = false)
     private Integer protein;
 
-    @ApiModelProperty(value = "Fat per 100g", example = "10")
+    @ApiModelProperty(value = "Fat per 100g", example = "10", position = 6)
     @Column(name = "fat", nullable = false)
     private Integer fat;
 
-    @ApiModelProperty(value = "Unit of the product.", example = "GRAM")
+    @ApiModelProperty(value = "Unit of the product.", example = "GRAM", position = 7)
     @Enumerated(EnumType.STRING)
     @Column(name = "unit", nullable = false)
     private Unit unit;

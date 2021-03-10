@@ -43,10 +43,18 @@ public class ProductController {
 
     @ApiOperation("Request to update a stock element.")
     @RequestMapping(value = "/product/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Product> updateStockElement(
+    public ResponseEntity<Product> updateProductElement(
             @RequestBody Product product) {
 
-        return ResponseEntity.ok(productDatabase.addElement(product));
+        return ResponseEntity.ok(productDatabase.updateElement(product));
+    }
+
+    @ApiOperation("Request to update a stock element.")
+    @RequestMapping(value = "/product/remove", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Product> removeProduct(
+            @RequestBody String productName) {
+
+        return ResponseEntity.ok(productDatabase.removeElement(productName));
     }
 
     @ApiOperation("Update the database with the backup file.")

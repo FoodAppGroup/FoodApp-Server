@@ -1,0 +1,10 @@
+{
+  "carbohydrates": 20,
+  "category": "FRUIT",
+  "fat": 10,
+  "kcal": 0,
+  "name": "Apfel",
+  "packageGram": 500,
+  "protein": 10,
+  "unit": "GRAM"
+}
