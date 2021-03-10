@@ -1,4 +1,4 @@
-package com.spring.controller.utility;
+package com.spring.database.utility;
 
 import com.spring.database.backup.ExcelManagement;
 import lombok.AllArgsConstructor;
@@ -24,10 +24,10 @@ public class RepoBackup<P, T extends JpaRepository<P, ?>, S extends ExcelManagem
      * @return log message from the database table with the changed size
      * @throws IOException conversion issues
      */
-    public String saveBackup() throws IOException {
+    public List<P> saveBackup() throws IOException {
         List<P> list = repo.findAll();
         excel.writeTable(list);
-        return list.size() + " rows saved";
+        return list;
     }
 
     /**
@@ -36,10 +36,8 @@ public class RepoBackup<P, T extends JpaRepository<P, ?>, S extends ExcelManagem
      * @return log message from the database table with the changed size
      * @throws IOException conversion issues
      */
-    public String loadBackup() throws IOException {
-        RepoLog<T> repoLog = new RepoLog<>(repo);
+    public List<P> loadBackup() throws IOException {
         List<P> list = excel.readTable();
-        repo.saveAll(list);
-        return repoLog.getChangedSize();
+        return repo.saveAll(list);
     }
 }

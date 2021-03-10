@@ -1,8 +1,7 @@
 package com.spring.database.backup;
 
 import com.spring.dataprovider.PropertyReader;
-import com.spring.model.entity.ShoppingListEntity;
-import com.spring.model.entity.compositeKey.ShoppingListKey;
+import com.spring.model.entity.ShoppingList;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -16,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ShoppingListExcelManagementTest {
 
-    private static final ShoppingListEntity shoppingList = new ShoppingListEntity();
-    private static final List<ShoppingListEntity> list = new ArrayList<>();
+    private static final ShoppingList shoppingList = new ShoppingList();
+    private static final List<ShoppingList> list = new ArrayList<>();
     private static ShoppingListExcelManagement excelManagement;
 
     @BeforeAll
@@ -25,7 +24,7 @@ class ShoppingListExcelManagementTest {
         PropertyReader.getInstance().initTestProperties();
         excelManagement = new ShoppingListExcelManagement();
 
-        shoppingList.setKey(new ShoppingListKey("testListe", "Nudeln"));
+        //shoppingList.setKey(new ShoppingListKey("testListe", "Nudeln"));
         shoppingList.setNumber(1);
 
         list.add(shoppingList);
@@ -46,7 +45,7 @@ class ShoppingListExcelManagementTest {
     @Test
     @Order(2)
     void read() throws IOException {
-        List<ShoppingListEntity> result = excelManagement.readTable();
+        List<ShoppingList> result = excelManagement.readTable();
         assertEquals(list.get(0), result.get(0));
     }
 

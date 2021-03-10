@@ -2,7 +2,7 @@ package com.spring.controller;
 
 import com.spring.database.backup.ShoppingListExcelManagement;
 import com.spring.database.repository.ShoppingListRepository;
-import com.spring.model.entity.ShoppingListEntity;
+import com.spring.model.entity.ShoppingList;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ public class ShoppingListController {
             int sizeBeforeStatement = shoppingListRepository.findAll().size();
 
             ShoppingListExcelManagement excelManagement = new ShoppingListExcelManagement();
-            List<ShoppingListEntity> list = excelManagement.readTable();
+            List<ShoppingList> list = excelManagement.readTable();
             shoppingListRepository.saveAll(list);
 
             int sizeAfterStatement = shoppingListRepository.findAll().size();
@@ -46,7 +46,7 @@ public class ShoppingListController {
             int sizeBeforeStatement = shoppingListRepository.findAll().size();
 
             ShoppingListExcelManagement excelManagement = new ShoppingListExcelManagement();
-            List<ShoppingListEntity> list = shoppingListRepository.findAll();
+            List<ShoppingList> list = shoppingListRepository.findAll();
             excelManagement.writeTable(list);
 
             int sizeAfterStatement = shoppingListRepository.findAll().size();

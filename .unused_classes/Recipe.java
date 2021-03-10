@@ -1,5 +1,6 @@
 package com.spring.model.entity;
 
+import com.spring.model.entity.RecipePart;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity(name = "Recipe")
 @Table(name = "recipe")
-public class RecipeEntity {
+public class Recipe {
 
     @Id
     @Column(name = "name", nullable = false, unique = true)
@@ -34,5 +35,5 @@ public class RecipeEntity {
     private Integer fat;
 
     @OneToMany(mappedBy = "recipe")
-    private Set<RecipePartEntity> recipeParts;
+    private Set<RecipePart> recipeParts;
 }

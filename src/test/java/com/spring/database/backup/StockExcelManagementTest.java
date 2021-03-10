@@ -1,7 +1,7 @@
 package com.spring.database.backup;
 
 import com.spring.dataprovider.PropertyReader;
-import com.spring.model.Stock;
+import com.spring.model.entity.Stock;
 import org.junit.jupiter.api.*;
 
 import java.io.File;

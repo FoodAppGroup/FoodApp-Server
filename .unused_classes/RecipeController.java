@@ -6,9 +6,9 @@ import com.spring.database.backup.RecipePlanningExcelManagement;
 import com.spring.database.repository.RecipePartRepository;
 import com.spring.database.repository.RecipePlanningRepository;
 import com.spring.database.repository.RecipeRepository;
-import com.spring.model.entity.RecipeEntity;
-import com.spring.model.entity.RecipePartEntity;
-import com.spring.model.entity.RecipePlanningEntity;
+import com.spring.model.entity.Recipe;
+import com.spring.model.entity.RecipePart;
+import com.spring.model.entity.RecipePlanning;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,15 +43,15 @@ public class RecipeController {
             int sizeBeforeStatementPlanning = recipePlanningRepository.findAll().size();
 
             RecipeExcelManagement excelManagement1 = new RecipeExcelManagement();
-            List<RecipeEntity> list1 = excelManagement1.readTable();
+            List<Recipe> list1 = excelManagement1.readTable();
             recipeRepository.saveAll(list1);
 
             RecipePartExcelManagement excelManagement2 = new RecipePartExcelManagement();
-            List<RecipePartEntity> list2 = excelManagement2.readTable();
+            List<RecipePart> list2 = excelManagement2.readTable();
             recipePartRepository.saveAll(list2);
 
             RecipePlanningExcelManagement excelManagement3 = new RecipePlanningExcelManagement();
-            List<RecipePlanningEntity> list3 = excelManagement3.readTable();
+            List<RecipePlanning> list3 = excelManagement3.readTable();
             recipePlanningRepository.saveAll(list3);
 
             int sizeAfterStatement = recipeRepository.findAll().size();
@@ -75,15 +75,15 @@ public class RecipeController {
             int sizeBeforeStatementPlanning = recipePlanningRepository.findAll().size();
 
             RecipeExcelManagement excelManagement1 = new RecipeExcelManagement();
-            List<RecipeEntity> list1 = excelManagement1.readTable();
+            List<Recipe> list1 = excelManagement1.readTable();
             recipeRepository.saveAll(list1);
 
             RecipePartExcelManagement excelManagement2 = new RecipePartExcelManagement();
-            List<RecipePartEntity> list2 = excelManagement2.readTable();
+            List<RecipePart> list2 = excelManagement2.readTable();
             recipePartRepository.saveAll(list2);
 
             RecipePlanningExcelManagement excelManagement3 = new RecipePlanningExcelManagement();
-            List<RecipePlanningEntity> list3 = excelManagement3.readTable();
+            List<RecipePlanning> list3 = excelManagement3.readTable();
             recipePlanningRepository.saveAll(list3);
 
             int sizeAfterStatement = recipeRepository.findAll().size();

@@ -1,4 +1,4 @@
-package com.spring.controller.utility;
+package com.spring.database.utility;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

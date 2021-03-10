@@ -11,15 +11,16 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@IdClass(RecipePlanningKey.class)
 @Entity(name = "RecipePlanning")
 @Table(name = "recipe_planning")
-public class RecipePlanningEntity implements Serializable {
+public class RecipePlanning implements Serializable {
 
-    @EmbeddedId
-    private RecipePlanningKey key;
-
+    @Id
     @ManyToOne
-    @MapsId("recipeName")
-    @JoinColumn(name = "recipe_name")
-    private RecipeEntity recipe;
+    @JoinColumn(name = "recipe_name", referencedColumnName = "name", nullable = false)
+    private Recipe recipe;
+
+    //==================================================================================================================
+
 }

@@ -1,11 +1,11 @@
 package com.spring.database.backup;
 
 import com.spring.dataprovider.PropertyReader;
-import com.spring.model.entity.RecipeEntity;
+import com.spring.model.entity.Recipe;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 
-public class RecipeExcelManagement extends ExcelManagement<RecipeEntity> {
+public class RecipeExcelManagement extends ExcelManagement<Recipe> {
 
     @Override
     protected void initData() {
@@ -21,7 +21,7 @@ public class RecipeExcelManagement extends ExcelManagement<RecipeEntity> {
     }
 
     @Override
-    protected void writeRow(Row row, RecipeEntity recipe, CellStyle style) {
+    protected void writeRow(Row row, Recipe recipe, CellStyle style) {
         writeCell(row, 0, recipe.getName(), style);
         writeCell(row, 1, recipe.getDescription(), style);
         writeCell(row, 2, recipe.getKCal().toString(), style);
@@ -31,8 +31,8 @@ public class RecipeExcelManagement extends ExcelManagement<RecipeEntity> {
     }
 
     @Override
-    protected RecipeEntity readRow(Row row) {
-        RecipeEntity recipe = new RecipeEntity();
+    protected Recipe readRow(Row row) {
+        Recipe recipe = new Recipe();
         recipe.setName(readString(row, 0));
         recipe.setDescription(readString(row, 1));
         recipe.setKCal(readInt(row, 2));

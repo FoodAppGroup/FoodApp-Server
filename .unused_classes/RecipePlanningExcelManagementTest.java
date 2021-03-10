@@ -1,7 +1,7 @@
 package com.spring.database.backup;
 
 import com.spring.dataprovider.PropertyReader;
-import com.spring.model.entity.RecipeEntity;
+import com.spring.model.entity.RecipePlanning;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -13,25 +13,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class RecipeExcelManagementTest {
+class RecipePlanningExcelManagementTest {
 
-    private static final RecipeEntity recipe = new RecipeEntity();
-    private static final List<RecipeEntity> list = new ArrayList<>();
-    private static RecipeExcelManagement excelManagement;
+    private static final RecipePlanning recipePlanning = new RecipePlanning();
+    private static final List<RecipePlanning> list = new ArrayList<>();
+    private static RecipePlanningExcelManagement excelManagement;
 
     @BeforeAll
     static void setUp() {
         PropertyReader.getInstance().initTestProperties();
-        excelManagement = new RecipeExcelManagement();
+        excelManagement = new RecipePlanningExcelManagement();
 
-        recipe.setName("Nudeln kochen");
-        recipe.setDescription("Nudeln kochen und warten");
-        recipe.setKCal(811);
-        recipe.setCarbohydrates(88);
-        recipe.setProtein(11);
-        recipe.setFat(7);
+//        recipePlanning.setKey(new RecipePlanningKey("Nudeln kochen"));
 
-        list.add(recipe);
+        list.add(recipePlanning);
     }
 
     @AfterAll
@@ -49,7 +44,7 @@ class RecipeExcelManagementTest {
     @Test
     @Order(2)
     void read() throws IOException {
-        List<RecipeEntity> result = excelManagement.readTable();
+        List<RecipePlanning> result = excelManagement.readTable();
         assertEquals(list.get(0), result.get(0));
     }
 
@@ -57,7 +52,7 @@ class RecipeExcelManagementTest {
     @Order(3)
     void removeFile() {
         if (PropertyReader.getInstance().getTest_DeleteTempFiles()) {
-            File file = new File(PropertyReader.getInstance().getExcel_RecipeTablePath());
+            File file = new File(PropertyReader.getInstance().getExcel_RecipePlanningTablePath());
             assertTrue(file.delete());
         }
     }
