@@ -1,4 +1,4 @@
-package com.spring.model;
+package com.spring.model.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,12 +14,12 @@ import javax.persistence.*;
 @Table(name = "product")
 public class Product {
 
-    @Id //Primary Key (JPA)
-    @ApiModelProperty(value = "Name of the product.", example = "Apfel") //Swagger Model Property
+    @ApiModelProperty(value = "Name of the product.", example = "Apfel")
+    @Id
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @ApiModelProperty(value = "Category in the store.", example = "FRUIT") // Swagger Model Property
+    @ApiModelProperty(value = "Category in the store.", example = "FRUIT")
     @Enumerated(EnumType.STRING) // JPA save Enum as string
     @Column(name = "category", nullable = false)
     private Category category;

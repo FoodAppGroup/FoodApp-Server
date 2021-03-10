@@ -14,8 +14,12 @@ public class Console {
     private static final String logFilePath = PropertyReader.getInstance().getConsole_LogDirectoryPath() + "/console-log_" + getFileTimeStamp() + ".log";
     private static final boolean showLog = PropertyReader.getInstance().getConsole_ShowLog();
 
-    public static void log(String header, String content) {
-        log("[" + header + "] " + content);
+    public static void logError(String message) {
+        log("ERROR", message);
+    }
+
+    public static void log(String header, String message) {
+        log("[" + header + "] " + message);
     }
 
     public static void log(String content) {
