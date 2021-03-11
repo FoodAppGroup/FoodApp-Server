@@ -32,7 +32,7 @@ public class StockDatabase {
         Stock stockElement = new Stock();
         stockElement.setProductName(productName);
         stockElement.setNumber(number);
-        //stockElement.setProduct(productDatabase.getElement(productName)); TODO -> create NullPointer
+        //stockElement.setProduct(productDatabase.getElement(productName)); //TODO -> create NullPointer
         stockRepository.saveAndFlush(stockElement);
         return getElement(productName);
     }

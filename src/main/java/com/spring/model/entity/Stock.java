@@ -21,9 +21,9 @@ public class Stock implements Serializable {
     private String productName;
 
     @ApiModelProperty(value = "Reference to the product.", example = "Apfel")
-    //@MapsId TODO -> will create the table with a foreign key, but crash the repository
+    //@MapsId //TODO -> will create the table with a foreign key, but crash the repository
     @OneToOne
-    @JoinColumn(name = "product_name", referencedColumnName = "name")
+    @JoinColumn(name = "product_name", referencedColumnName = "name", insertable = false, updatable = false)
     private Product product;
 
     @ApiModelProperty(value = "Number of the amount in the stock.", example = "2")

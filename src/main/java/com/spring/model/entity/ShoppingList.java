@@ -1,6 +1,5 @@
 package com.spring.model.entity;
 
-import com.spring.model.entity.compositeKey.ShoppingListKey;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,24 +10,33 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(ShoppingListKey.class)
 @Entity(name = "ShoppingList")
 @Table(name = "shopping_list")
 public class ShoppingList implements Serializable {
 
-    @Id
-    @Column(name = "list_name", nullable = false)
-    private String listName;
+    @EmbeddedId
+    private ShoppingListKey key;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "product_name", referencedColumnName = "name", nullable = false)
+    @JoinColumn(name = "product_name", referencedColumnName = "name", insertable = false, updatable = false)
     private Product product;
 
     @Column(name = "number", nullable = false)
     private Integer number;
 
     //==================================================================================================================
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Embeddable
+    public static class ShoppingListKey implements Serializable {
+
+        @Column(name = "list_name", nullable = false)
+        private String listName;
+        @Column(name = "product_name", nullable = false)
+        private String productName;
+    }
 
 }
 
