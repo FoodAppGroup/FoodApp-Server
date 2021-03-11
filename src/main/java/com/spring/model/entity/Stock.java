@@ -1,6 +1,5 @@
 package com.spring.model.entity;
 
-import com.spring.model.composite.StockKey;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,18 +15,18 @@ import java.io.Serializable;
 @Table(name = "stock")
 public class Stock implements Serializable {
 
-    @EmbeddedId
-    private StockKey key;
+    @ApiModelProperty(value = "Linked product name.", example = "Apfel")
+    @Id
+    @Column(name = "product_name", nullable = false)
+    private String productName;
+
+    @ApiModelProperty(value = "Reference to the product.", example = "Apfel")
+    //@MapsId TODO -> will create the table with a foreign key, but crash the repository
+    @OneToOne
+    @JoinColumn(name = "product_name", referencedColumnName = "name")
+    private Product product;
 
     @ApiModelProperty(value = "Number of the amount in the stock.", example = "2")
     @Column(name = "number", nullable = false)
     private Integer number;
-
-    @MapsId("productName")
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_name", nullable = false)
-    private Product product;
-
-    //==================================================================================================================
-
 }
