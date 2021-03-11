@@ -4,6 +4,8 @@ import com.spring.ServerApplication;
 import com.spring.dataprovider.PropertyReader;
 import com.spring.logging.Console;
 import com.spring.model.entity.Product;
+import com.spring.model.entity.Stock;
+import com.spring.model.request.StockRequest;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,9 +24,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(classes = {ServerApplication.class})
 @WebAppConfiguration
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class ProductControllerTest {
+class StockControllerTest {
 
-    private static final Product testProduct = new Product();
+    private static final Stock testStock = new Stock();
+
+    @Autowired
+    private StockController stockController;
 
     @Autowired
     private ProductController productController;
@@ -33,6 +38,7 @@ class ProductControllerTest {
     static void setUp() {
         PropertyReader.getInstance().initTestProperties();
 
+        Product testProduct = new Product();
         testProduct.setName("Test Produkt");
         testProduct.setCategory(Product.Category.FRUIT);
         testProduct.setPackageGram(100);
@@ -42,53 +48,64 @@ class ProductControllerTest {
         testProduct.setFat(10);
         testProduct.setUnit(Product.Unit.PIECES);
 
-        Console.log("TEST INFO", testProduct.toString());
+        testStock.setProductName(testProduct.getName());
+        testStock.setProduct(testProduct);
+        testStock.setNumber(1);
+
+        Console.log("TEST INFO", testStock.toString());
     }
 
     @AfterAll
     static void tearDown() {
-        Console.log("TEST INFO", testProduct.toString());
+        Console.log("TEST INFO", testStock.toString());
         PropertyReader.getInstance().removeTestProperties();
     }
 
     @Test
     @Order(1)
     void addProductElement() {
-        ResponseEntity<Product> response = productController.addProductElement(testProduct);
+        productController.addProductElement(testStock.getProduct());
+        Console.log("TEST INSERT", testStock.getProduct().toString());
+
+        ResponseEntity<Stock> response = stockController.addStockElement(new StockRequest(testStock.getProductName(), testStock.getNumber()));
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(testProduct, response.getBody());
+        assertEquals(testStock.getProductName(), Objects.requireNonNull(response.getBody()).getProductName());
+        assertEquals(testStock.getNumber(), Objects.requireNonNull(response.getBody()).getNumber());
     }
 
     @Test
     @Order(2)
     void getProductElement() {
-        ResponseEntity<Product> response = productController.getProductElement(testProduct.getName());
+        ResponseEntity<Stock> response = stockController.getStockElement(testStock.getProductName());
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(testProduct, response.getBody());
+        assertEquals(testStock, response.getBody());
     }
 
     @Test
     @Order(3)
     void getAllProductElements() {
-        ResponseEntity<List<Product>> response = productController.getAllProductElements();
+        ResponseEntity<List<Stock>> response = stockController.getAllStockElements();
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertTrue(Objects.requireNonNull(response.getBody()).contains(testProduct));
+        assertTrue(Objects.requireNonNull(response.getBody()).contains(testStock));
     }
 
     @Test
     @Order(4)
     void updateStockElement() {
-        testProduct.setKCal(150);
-        ResponseEntity<Product> response = productController.updateProductElement(testProduct);
+        testStock.setNumber(15);
+        ResponseEntity<Stock> response = stockController.updateStockElement(new StockRequest(testStock.getProductName(), testStock.getNumber()));
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(testProduct, response.getBody());
+        assertEquals(testStock, response.getBody());
     }
 
     @Test
     @Order(5)
     void removeProductElement() {
-        ResponseEntity<Product> response = productController.removeProduct(testProduct.getName());
+        ResponseEntity<Stock> response = stockController.removeStockElement(testStock.getProductName());
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(testProduct, response.getBody());
+        assertEquals(testStock, response.getBody());
+
+        productController.removeProduct(testStock.getProductName());
+        Console.log("TEST REMOVE", testStock.getProduct().toString());
     }
 }
