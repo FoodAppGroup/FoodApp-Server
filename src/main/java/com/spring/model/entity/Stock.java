@@ -1,8 +1,8 @@
 package com.spring.model.entity;
 
+import com.spring.model.composite.StockKey;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,27 +17,17 @@ import java.io.Serializable;
 public class Stock implements Serializable {
 
     @EmbeddedId
-    private Key key;
+    private StockKey key;
 
     @ApiModelProperty(value = "Number of the amount in the stock.", example = "2")
     @Column(name = "number", nullable = false)
     private Integer number;
 
     @MapsId("productName")
-    @OneToOne(targetEntity = Product.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "product_name", referencedColumnName = "name", nullable = false, unique = true, updatable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_name", nullable = false)
     private Product product;
 
     //==================================================================================================================
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Embeddable
-    public static class Key implements Serializable {
-
-        @Basic
-        @ApiModelProperty(value = "Link to a product.", example = "Apfel")
-        private String productName;
-    }
 }

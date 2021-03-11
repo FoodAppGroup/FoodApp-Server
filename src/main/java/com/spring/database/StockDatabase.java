@@ -1,7 +1,7 @@
 package com.spring.database;
 
 import com.spring.database.repository.StockRepository;
-import com.spring.model.entity.Product;
+import com.spring.model.composite.StockKey;
 import com.spring.model.entity.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,11 +15,9 @@ public class StockDatabase {
     @Autowired
     private StockRepository stockRepository;
 
-    @Autowired
-    private ProductDatabase productDatabase;
 
     public Stock getElement(String productName) throws IllegalArgumentException {
-        Optional<Stock> stock = stockRepository.findById(new Stock.Key(productName));
+        Optional<Stock> stock = stockRepository.findById(new StockKey(productName));
         if (stock.isPresent()) {
             return stock.get();
         } else {
@@ -32,12 +30,9 @@ public class StockDatabase {
     }
 
     public Stock addElement(String productName, int number) throws IllegalArgumentException {
-        Product product = productDatabase.getElement(productName);
         Stock stockElement = new Stock();
-        stockElement.setKey(new Stock.Key(productName));
+        stockElement.setKey(new StockKey(productName));
         stockElement.setNumber(number);
-        stockElement.setProduct(product);
-
         return stockRepository.save(stockElement);
     }
 
@@ -45,5 +40,11 @@ public class StockDatabase {
         Stock stock = getElement(productName);
         stock.setNumber(number);
         return stockRepository.save(stock);
+    }
+
+    public Stock removeElement(String productName) throws IllegalArgumentException {
+        Stock stockElement = getElement(productName);
+        stockRepository.delete(stockElement);
+        return stockElement;
     }
 }

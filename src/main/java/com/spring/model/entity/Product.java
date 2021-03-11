@@ -6,33 +6,34 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @ApiModel
 @Entity(name = "Product")
 @Table(name = "product")
-public class Product {
+public class Product implements Serializable {
 
     @ApiModelProperty(value = "Name of the product.", example = "Apfel")
     @Id
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @ApiModelProperty(value = "Category in the store.", example = "FRUIT", position = 1)
+    @ApiModelProperty(value = "Category in the store.", example = "FRUIT")
     @Enumerated(EnumType.STRING) // JPA save Enum as string
     @Column(name = "category", nullable = false)
     private Category category;
 
-    @ApiModelProperty(value = "Gram in one package of the store.", example = "500", position = 2)
+    @ApiModelProperty(value = "Gram in one package of the store.", example = "500")
     @Column(name = "package_gram", nullable = false)
     private Integer packageGram;
 
-    @ApiModelProperty(value = "kCal per 100g", example = "400", position = 3)
+    @ApiModelProperty(value = "kCal per 100g", example = "400")
     @Column(name = "kcal", nullable = false)
     private Integer kCal;
 
-    @ApiModelProperty(value = "Carbohydrates per 100g", example = "20", position = 4)
+    @ApiModelProperty(value = "Carbohydrates per 100g", example = "20")
     @Column(name = "carbohydrates", nullable = false)
     private Integer carbohydrates;
 
