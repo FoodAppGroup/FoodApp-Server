@@ -20,7 +20,8 @@ public class StockController {
 
     @ApiOperation("Request to get a stock element by it's name.")
     @RequestMapping(value = "/stock/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Stock> getStockElement(@RequestParam(value = "name", defaultValue = "Apfel") String productName) {
+    public ResponseEntity<Stock> getStockElement(
+            @RequestParam(value = "name", defaultValue = "Apfel") String productName) {
 
         return ResponseEntity.ok(stockDatabase.getElement(productName));
     }
@@ -32,16 +33,27 @@ public class StockController {
         return ResponseEntity.ok(stockDatabase.getAllElements());
     }
 
-
     @ApiOperation("Request to add a new stock element.")
     @RequestMapping(value = "/stock/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Stock> addStockElement(@RequestBody StockRequest request) {
+    public ResponseEntity<Stock> addStockElement(
+            @RequestBody StockRequest request) {
+
         return ResponseEntity.ok(stockDatabase.addElement(request.getProductName(), request.getNumber()));
     }
 
     @ApiOperation("Request to update a stock element.")
     @RequestMapping(value = "/stock/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Stock> updateStockElement(@RequestBody StockRequest request) {
+    public ResponseEntity<Stock> updateStockElement(
+            @RequestBody StockRequest request) {
+
         return ResponseEntity.ok(stockDatabase.updateElement(request.getProductName(), request.getNumber()));
+    }
+
+    @ApiOperation("Request to update a stock element.")
+    @RequestMapping(value = "/stock/remove", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Stock> removeStockElement(
+            @RequestBody String productName) {
+
+        return ResponseEntity.ok(stockDatabase.removeElement(productName));
     }
 }
