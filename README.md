@@ -1,3 +1,7 @@
+[![CI](https://github.com/FoodAppGroup/FoodApp-Server/actions/workflows/ci.yml/badge.svg)](https://github.com/FoodAppGroup/FoodApp-Server/actions/workflows/ci.yml)
+
+[![Deploy Image](https://github.com/FoodAppGroup/FoodApp-Server/actions/workflows/deploy-image.yml/badge.svg)](https://github.com/FoodAppGroup/FoodApp-Server/actions/workflows/deploy-image.yml)
+
 # Fresh Planner
 
 ## Useful Links
