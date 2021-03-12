@@ -129,9 +129,10 @@ public class EntityName implements Serializable {
 ## Useful Links
 
 * [Entity Key Variants](https://www.objectdb.com/java/jpa/entity/id)
-* [Join Columns](https://www.baeldung.com/jpa-join-column)
+* [@JoinColumn](https://www.baeldung.com/jpa-join-column)
+* [@ManyToMany](https://www.baeldung.com/jpa-many-to-many)
 * [Foreign Key as Primary Key](https://stackoverflow.com/questions/31385658/jpa-how-to-make-composite-foreign-key-part-of-composite-primary-key)
-* [JPA Repository Queries](https://www.baeldung.com/spring-data-jpa-query)
+* [JPA Repository @Queries](https://www.baeldung.com/spring-data-jpa-query)
 
 [Back to README](../README.md)
 
