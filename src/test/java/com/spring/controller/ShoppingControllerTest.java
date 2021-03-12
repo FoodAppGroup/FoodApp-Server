@@ -64,7 +64,7 @@ class ShoppingControllerTest {
     @Test
     @Order(1)
     void addElement() {
-        productController.addProductElement(testShopping.getProduct());
+        productController.addElement(testShopping.getProduct());
         Console.log("TEST INSERT", testShopping.getProduct().toString());
 
         ResponseEntity<Shopping> response = shoppingController.addElement(
@@ -114,7 +114,7 @@ class ShoppingControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testShopping, response.getBody());
 
-        productController.removeProduct(testShopping.getKey().getProductName());
+        productController.removeElement(testShopping.getKey().getProductName());
         Console.log("TEST REMOVE", testShopping.getProduct().toString());
     }
 }

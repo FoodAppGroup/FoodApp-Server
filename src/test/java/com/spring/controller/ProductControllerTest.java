@@ -54,7 +54,7 @@ class ProductControllerTest {
     @Test
     @Order(1)
     void addElement() {
-        ResponseEntity<Product> response = productController.addProductElement(testProduct);
+        ResponseEntity<Product> response = productController.addElement(testProduct);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testProduct, response.getBody());
     }
@@ -62,7 +62,7 @@ class ProductControllerTest {
     @Test
     @Order(2)
     void getElement() {
-        ResponseEntity<Product> response = productController.getProductElement(testProduct.getName());
+        ResponseEntity<Product> response = productController.getElement(testProduct.getName());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testProduct, response.getBody());
     }
@@ -70,7 +70,7 @@ class ProductControllerTest {
     @Test
     @Order(3)
     void getAllElements() {
-        ResponseEntity<List<Product>> response = productController.getAllProductElements();
+        ResponseEntity<List<Product>> response = productController.getAllElements();
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(Objects.requireNonNull(response.getBody()).contains(testProduct));
     }
@@ -79,7 +79,7 @@ class ProductControllerTest {
     @Order(4)
     void updateElement() {
         testProduct.setKCal(150);
-        ResponseEntity<Product> response = productController.updateProductElement(testProduct);
+        ResponseEntity<Product> response = productController.updateElement(testProduct);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testProduct, response.getBody());
     }
@@ -87,7 +87,7 @@ class ProductControllerTest {
     @Test
     @Order(5)
     void removeElement() {
-        ResponseEntity<Product> response = productController.removeProduct(testProduct.getName());
+        ResponseEntity<Product> response = productController.removeElement(testProduct.getName());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testProduct, response.getBody());
     }

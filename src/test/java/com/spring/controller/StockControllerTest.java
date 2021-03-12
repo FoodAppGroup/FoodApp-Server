@@ -64,10 +64,10 @@ class StockControllerTest {
     @Test
     @Order(1)
     void addElement() {
-        productController.addProductElement(testStock.getProduct());
+        productController.addElement(testStock.getProduct());
         Console.log("TEST INSERT", testStock.getProduct().toString());
 
-        ResponseEntity<Stock> response = stockController.addStockElement(new StockRequest(testStock.getProductName(), testStock.getNumber()));
+        ResponseEntity<Stock> response = stockController.addElement(new StockRequest(testStock.getProductName(), testStock.getNumber()));
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testStock, response.getBody());
     }
@@ -75,7 +75,7 @@ class StockControllerTest {
     @Test
     @Order(2)
     void getElement() {
-        ResponseEntity<Stock> response = stockController.getStockElement(testStock.getProductName());
+        ResponseEntity<Stock> response = stockController.getElement(testStock.getProductName());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testStock, response.getBody());
     }
@@ -83,7 +83,7 @@ class StockControllerTest {
     @Test
     @Order(3)
     void getAllElements() {
-        ResponseEntity<List<Stock>> response = stockController.getAllStockElements();
+        ResponseEntity<List<Stock>> response = stockController.getAllElements();
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(Objects.requireNonNull(response.getBody()).contains(testStock));
     }
@@ -92,7 +92,7 @@ class StockControllerTest {
     @Order(4)
     void updateElement() {
         testStock.setNumber(15);
-        ResponseEntity<Stock> response = stockController.updateStockElement(new StockRequest(testStock.getProductName(), testStock.getNumber()));
+        ResponseEntity<Stock> response = stockController.updateElement(new StockRequest(testStock.getProductName(), testStock.getNumber()));
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testStock, response.getBody());
     }
@@ -100,11 +100,11 @@ class StockControllerTest {
     @Test
     @Order(5)
     void removeElement() {
-        ResponseEntity<Stock> response = stockController.removeStockElement(testStock.getProductName());
+        ResponseEntity<Stock> response = stockController.removeElement(testStock.getProductName());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testStock, response.getBody());
 
-        productController.removeProduct(testStock.getProductName());
+        productController.removeElement(testStock.getProductName());
         Console.log("TEST REMOVE", testStock.getProduct().toString());
     }
 }

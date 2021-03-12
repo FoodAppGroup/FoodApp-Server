@@ -20,7 +20,7 @@ public class ProductController {
 
     @ApiOperation("Request to get a product element by it's name.")
     @RequestMapping(value = "/product/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Product> getProductElement(
+    public ResponseEntity<Product> getElement(
             @RequestParam(value = "name", defaultValue = "Apfel") String productName) {
 
         return ResponseEntity.ok(productDatabase.getElement(productName));
@@ -28,14 +28,14 @@ public class ProductController {
 
     @ApiOperation("Request to get all product elements.")
     @RequestMapping(value = "/product/get-all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Product>> getAllProductElements() {
+    public ResponseEntity<List<Product>> getAllElements() {
 
         return ResponseEntity.ok(productDatabase.getAllElements());
     }
 
     @ApiOperation("Request to add a new product element.")
     @RequestMapping(value = "/product/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Product> addProductElement(
+    public ResponseEntity<Product> addElement(
             @RequestBody Product product) {
 
         return ResponseEntity.ok(productDatabase.addElement(product));
@@ -43,7 +43,7 @@ public class ProductController {
 
     @ApiOperation("Request to update a product element.")
     @RequestMapping(value = "/product/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Product> updateProductElement(
+    public ResponseEntity<Product> updateElement(
             @RequestBody Product product) {
 
         return ResponseEntity.ok(productDatabase.updateElement(product));
@@ -51,7 +51,7 @@ public class ProductController {
 
     @ApiOperation("Request to update a product element.")
     @RequestMapping(value = "/product/remove", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Product> removeProduct(
+    public ResponseEntity<Product> removeElement(
             @RequestBody String productName) {
 
         return ResponseEntity.ok(productDatabase.removeElement(productName));
@@ -59,14 +59,14 @@ public class ProductController {
 
     @ApiOperation("Update the database with the backup file.")
     @RequestMapping(value = "/product/backup/load", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Product>> loadBackupFromFile() throws IOException {
+    public ResponseEntity<List<Product>> loadBackup() throws IOException {
 
         return ResponseEntity.ok(productDatabase.loadBackup());
     }
 
     @ApiOperation("Saves the entire product table to a file.")
     @RequestMapping(value = "/product/backup/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Product>> saveBackupToFile() throws IOException {
+    public ResponseEntity<List<Product>> saveBackup() throws IOException {
 
         return ResponseEntity.ok(productDatabase.saveBackup());
     }

@@ -20,7 +20,7 @@ public class StockController {
 
     @ApiOperation("Request to get a stock element by it's name.")
     @RequestMapping(value = "/stock/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Stock> getStockElement(
+    public ResponseEntity<Stock> getElement(
             @RequestParam(value = "product name", defaultValue = "Apfel") String productName) {
 
         return ResponseEntity.ok(stockDatabase.getElement(productName));
@@ -28,14 +28,14 @@ public class StockController {
 
     @ApiOperation("Request to get all stock elements.")
     @RequestMapping(value = "/stock/get-all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Stock>> getAllStockElements() {
+    public ResponseEntity<List<Stock>> getAllElements() {
 
         return ResponseEntity.ok(stockDatabase.getAllElements());
     }
 
     @ApiOperation("Request to add a new stock element.")
     @RequestMapping(value = "/stock/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Stock> addStockElement(
+    public ResponseEntity<Stock> addElement(
             @RequestBody StockRequest request) {
 
         return ResponseEntity.ok(stockDatabase.addElement(request.getProductName(), request.getNumber()));
@@ -43,7 +43,7 @@ public class StockController {
 
     @ApiOperation("Request to update a stock element.")
     @RequestMapping(value = "/stock/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Stock> updateStockElement(
+    public ResponseEntity<Stock> updateElement(
             @RequestBody StockRequest request) {
 
         return ResponseEntity.ok(stockDatabase.updateElement(request.getProductName(), request.getNumber()));
@@ -51,7 +51,7 @@ public class StockController {
 
     @ApiOperation("Request to update a stock element.")
     @RequestMapping(value = "/stock/remove", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Stock> removeStockElement(
+    public ResponseEntity<Stock> removeElement(
             @RequestParam(value = "product name", defaultValue = "Apfel") String productName) {
 
         return ResponseEntity.ok(stockDatabase.removeElement(productName));
