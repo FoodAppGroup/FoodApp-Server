@@ -3,7 +3,7 @@ MAINTAINER Felix Steinke <steinke.felix@yahoo.de>
 
 COPY  . /root/app/
 WORKDIR /root/app
-RUN mvn install
+RUN mvn install -DskipTests
 
 FROM openjdk:11 as jdk
 MAINTAINER Felix Steinke <steinke.felix@yahoo.com>
