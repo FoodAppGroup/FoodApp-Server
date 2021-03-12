@@ -1,11 +1,13 @@
 package com.spring.database;
 
+import com.spring.database.backup.StockExcelManagement;
 import com.spring.database.repository.StockRepository;
 import com.spring.model.entity.Product;
 import com.spring.model.entity.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,5 +55,23 @@ public class StockDatabase {
         Stock stockElement = getElement(productName);
         stockRepository.delete(stockElement);
         return stockElement;
+    }
+
+    //==================================================================================================================
+
+    public List<Stock> saveBackup() throws IOException {
+        productDatabase.saveBackup();
+        StockExcelManagement excelManagement = new StockExcelManagement();
+        List<Stock> allElements = getAllElements();
+        excelManagement.writeTable(allElements);
+        return allElements;
+    }
+
+    public List<Stock> loadBackup() throws IOException {
+        productDatabase.loadBackup();
+        StockExcelManagement excelManagement = new StockExcelManagement();
+        excelManagement.readTable().forEach(
+                stock -> addElement(stock.getProductName(), stock.getNumber()));
+        return getAllElements();
     }
 }

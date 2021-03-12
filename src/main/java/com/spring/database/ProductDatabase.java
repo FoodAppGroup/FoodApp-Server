@@ -2,7 +2,6 @@ package com.spring.database;
 
 import com.spring.database.backup.ProductExcelManagement;
 import com.spring.database.repository.ProductRepository;
-import com.spring.database.utility.RepoBackup;
 import com.spring.model.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -52,14 +51,15 @@ public class ProductDatabase {
     //==================================================================================================================
 
     public List<Product> saveBackup() throws IOException {
-        RepoBackup<Product, ProductRepository, ProductExcelManagement> repoBackup
-                = new RepoBackup<>(productRepository, new ProductExcelManagement());
-        return repoBackup.saveBackup();
+        ProductExcelManagement excelManagement = new ProductExcelManagement();
+        List<Product> allElements = getAllElements();
+        excelManagement.writeTable(allElements);
+        return allElements;
     }
 
     public List<Product> loadBackup() throws IOException {
-        RepoBackup<Product, ProductRepository, ProductExcelManagement> repoBackup
-                = new RepoBackup<>(productRepository, new ProductExcelManagement());
-        return repoBackup.saveBackup();
+        ProductExcelManagement excelManagement = new ProductExcelManagement();
+        excelManagement.readTable().forEach(this::addElement);
+        return getAllElements();
     }
 }

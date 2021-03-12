@@ -18,7 +18,7 @@ public class ProductExcelManagement extends ExcelManagement<Product> {
 
         header.put(0, "Name");
         header.put(1, "Category");
-        header.put(2, "PackageGram");
+        header.put(2, "Package Gram");
         header.put(3, "kCal");
         header.put(4, "Carbohydrates");
         header.put(5, "Protein");
