@@ -48,7 +48,7 @@ class ShoppingControllerTest {
         testProduct.setFat(10);
         testProduct.setUnit(Product.Unit.PIECES);
 
-        testShopping.setKey(new Shopping.ShoppingKey("Test Liste", testProduct.getName()));
+        testShopping.setKey(new Shopping.Key("Test Liste", testProduct.getName()));
         testShopping.setProduct(testProduct);
         testShopping.setNumber(1);
 

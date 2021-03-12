@@ -21,7 +21,7 @@ public class ShoppingDatabase {
 
 
     public Shopping getElement(String listName, String productName) throws IllegalArgumentException {
-        Optional<Shopping> shoppingList = shoppingRepository.findById(new Shopping.ShoppingKey(listName, productName));
+        Optional<Shopping> shoppingList = shoppingRepository.findById(new Shopping.Key(listName, productName));
         if (shoppingList.isPresent()) {
             return shoppingList.get();
         } else {
@@ -41,7 +41,7 @@ public class ShoppingDatabase {
         Product product = productDatabase.getElement(productName);
 
         Shopping shoppingElement = new Shopping();
-        shoppingElement.setKey(new Shopping.ShoppingKey(listName, productName));
+        shoppingElement.setKey(new Shopping.Key(listName, productName));
         shoppingElement.setNumber(number);
         shoppingRepository.saveAndFlush(shoppingElement);
 

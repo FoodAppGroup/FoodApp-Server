@@ -27,7 +27,7 @@ public class ShoppingListExcelManagement extends ExcelManagement<ShoppingList> {
     @Override
     protected ShoppingList readRow(Row row) {
         ShoppingList shoppingList = new ShoppingList();
-//        shoppingList.setKey(new ShoppingKey(
+//        shoppingList.setKey(new Key(
 //                readString(row, 0),
 //                readString(row, 1)));
         shoppingList.setNumber(readInt(row, 2));
