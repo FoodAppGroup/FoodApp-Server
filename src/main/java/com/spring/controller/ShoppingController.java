@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -65,5 +66,19 @@ public class ShoppingController {
             @RequestParam(value = "product name", defaultValue = "Apfel") String productName) {
 
         return ResponseEntity.ok(shoppingDatabase.removeElement(listName, productName));
+    }
+
+    @ApiOperation("Update the database with the backup file.")
+    @RequestMapping(value = "/shopping/backup/load", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Shopping>> loadBackup() throws IOException {
+
+        return ResponseEntity.ok(shoppingDatabase.loadBackup());
+    }
+
+    @ApiOperation("Saves the entire table to a file.")
+    @RequestMapping(value = "/shopping/backup/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Shopping>> saveBackup() throws IOException {
+
+        return ResponseEntity.ok(shoppingDatabase.saveBackup());
     }
 }
