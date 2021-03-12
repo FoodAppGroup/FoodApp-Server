@@ -37,15 +37,15 @@ public class Product implements Serializable {
     @Column(name = "carbohydrates", nullable = false)
     private Integer carbohydrates;
 
-    @ApiModelProperty(value = "Protein per 100g", example = "10", position = 5)
+    @ApiModelProperty(value = "Protein per 100g", example = "10")
     @Column(name = "protein", nullable = false)
     private Integer protein;
 
-    @ApiModelProperty(value = "Fat per 100g", example = "10", position = 6)
+    @ApiModelProperty(value = "Fat per 100g", example = "10")
     @Column(name = "fat", nullable = false)
     private Integer fat;
 
-    @ApiModelProperty(value = "Unit of the product.", example = "GRAM", position = 7)
+    @ApiModelProperty(value = "Unit of the product.", example = "GRAM")
     @Enumerated(EnumType.STRING)
     @Column(name = "unit", nullable = false)
     private Unit unit;
