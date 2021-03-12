@@ -12,7 +12,7 @@ services:
       - SYS_NICE
     container_name: fresh_planner_database
     ports:
-      - 3306:3306
+      - "3306:3306"
     restart: always
     environment:
       MYSQL_DATABASE: fresh_planner_database
@@ -34,7 +34,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - 8080:8080 # Forward the exposed port 8080 on the container to port 8080 on the host machine
+      - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
     restart: always
     networks: # Networks to join (Services on the same network can communicate with each other using their name)
       - backend
@@ -42,7 +42,6 @@ services:
 
   # Frontend Service
   # see the Tutorial Reference for later
-
 
 
 # Volumes
