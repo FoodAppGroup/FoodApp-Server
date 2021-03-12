@@ -8,9 +8,9 @@ on:
   # types:
   #  - completed
   pull_request:
-    types: [ closed ]
+    types: [ merged ]
     branches:
-      - master
+      - main
 
 jobs:
   Docker-Image-and-SSH-Deployment:
