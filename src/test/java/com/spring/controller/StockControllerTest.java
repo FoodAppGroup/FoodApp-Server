@@ -52,12 +52,12 @@ class StockControllerTest {
         testStock.setProduct(testProduct);
         testStock.setNumber(1);
 
-        Console.log("TEST INFO", testStock.toString());
+        Console.log("TEST START", testStock.toString());
     }
 
     @AfterAll
     static void tearDown() {
-        Console.log("TEST INFO", testStock.toString());
+        Console.log("TEST END", testStock.toString());
         PropertyReader.getInstance().removeTestProperties();
     }
 

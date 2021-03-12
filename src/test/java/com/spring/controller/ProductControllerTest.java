@@ -42,12 +42,12 @@ class ProductControllerTest {
         testProduct.setFat(10);
         testProduct.setUnit(Product.Unit.PIECES);
 
-        Console.log("TEST INFO", testProduct.toString());
+        Console.log("TEST START", testProduct.toString());
     }
 
     @AfterAll
     static void tearDown() {
-        Console.log("TEST INFO", testProduct.toString());
+        Console.log("TEST END", testProduct.toString());
         PropertyReader.getInstance().removeTestProperties();
     }
 

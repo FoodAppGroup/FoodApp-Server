@@ -52,12 +52,12 @@ class ShoppingControllerTest {
         testShopping.setProduct(testProduct);
         testShopping.setNumber(1);
 
-        Console.log("TEST INFO", testShopping.toString());
+        Console.log("TEST START", testShopping.toString());
     }
 
     @AfterAll
     static void tearDown() {
-        Console.log("TEST INFO", testShopping.toString());
+        Console.log("TEST END", testShopping.toString());
         PropertyReader.getInstance().removeTestProperties();
     }
 

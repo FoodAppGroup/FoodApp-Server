@@ -1,7 +1,5 @@
 package com.spring.dataprovider;
 
-import com.spring.logging.Console;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -33,7 +31,6 @@ public class PropertyReader {
                 properties.setProperty(key.toString(), value.toString().replace("main", "test"));
             }
         });
-        Console.log("PROPERTY INFO", "Initialized Test Properties: main -> test");
     }
 
     public void removeTestProperties() {
@@ -42,7 +39,6 @@ public class PropertyReader {
                 properties.setProperty(key.toString(), value.toString().replace("test", "main"));
             }
         });
-        Console.log("PROPERTY INFO", "Removed Test Properties: test -> main");
     }
 
     public Boolean getConsole_ShowLog() {
