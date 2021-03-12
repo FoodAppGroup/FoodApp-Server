@@ -63,19 +63,18 @@ class StockControllerTest {
 
     @Test
     @Order(1)
-    void addProductElement() {
+    void addElement() {
         productController.addProductElement(testStock.getProduct());
         Console.log("TEST INSERT", testStock.getProduct().toString());
 
         ResponseEntity<Stock> response = stockController.addStockElement(new StockRequest(testStock.getProductName(), testStock.getNumber()));
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(testStock.getProductName(), Objects.requireNonNull(response.getBody()).getProductName());
-        assertEquals(testStock.getNumber(), Objects.requireNonNull(response.getBody()).getNumber());
+        assertEquals(testStock, response.getBody());
     }
 
     @Test
     @Order(2)
-    void getProductElement() {
+    void getElement() {
         ResponseEntity<Stock> response = stockController.getStockElement(testStock.getProductName());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testStock, response.getBody());
@@ -83,7 +82,7 @@ class StockControllerTest {
 
     @Test
     @Order(3)
-    void getAllProductElements() {
+    void getAllElements() {
         ResponseEntity<List<Stock>> response = stockController.getAllStockElements();
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(Objects.requireNonNull(response.getBody()).contains(testStock));
@@ -91,7 +90,7 @@ class StockControllerTest {
 
     @Test
     @Order(4)
-    void updateStockElement() {
+    void updateElement() {
         testStock.setNumber(15);
         ResponseEntity<Stock> response = stockController.updateStockElement(new StockRequest(testStock.getProductName(), testStock.getNumber()));
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -100,7 +99,7 @@ class StockControllerTest {
 
     @Test
     @Order(5)
-    void removeProductElement() {
+    void removeElement() {
         ResponseEntity<Stock> response = stockController.removeStockElement(testStock.getProductName());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testStock, response.getBody());

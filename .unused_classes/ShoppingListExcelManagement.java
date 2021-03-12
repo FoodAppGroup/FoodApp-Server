@@ -10,7 +10,7 @@ public class ShoppingListExcelManagement extends ExcelManagement<ShoppingList> {
     @Override
     protected void initData() {
         filePath = PropertyReader.getInstance().getExcel_ShoppingListTablePath();
-        sheetName = "ShoppingList";
+        sheetName = "Shopping";
 
         header.put(0, "ListName");
         header.put(1, "ProductName");
@@ -27,7 +27,7 @@ public class ShoppingListExcelManagement extends ExcelManagement<ShoppingList> {
     @Override
     protected ShoppingList readRow(Row row) {
         ShoppingList shoppingList = new ShoppingList();
-//        shoppingList.setKey(new ShoppingListKey(
+//        shoppingList.setKey(new ShoppingKey(
 //                readString(row, 0),
 //                readString(row, 1)));
         shoppingList.setNumber(readInt(row, 2));

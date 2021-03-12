@@ -53,7 +53,7 @@ class ProductControllerTest {
 
     @Test
     @Order(1)
-    void addProductElement() {
+    void addElement() {
         ResponseEntity<Product> response = productController.addProductElement(testProduct);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testProduct, response.getBody());
@@ -61,7 +61,7 @@ class ProductControllerTest {
 
     @Test
     @Order(2)
-    void getProductElement() {
+    void getElement() {
         ResponseEntity<Product> response = productController.getProductElement(testProduct.getName());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testProduct, response.getBody());
@@ -69,7 +69,7 @@ class ProductControllerTest {
 
     @Test
     @Order(3)
-    void getAllProductElements() {
+    void getAllElements() {
         ResponseEntity<List<Product>> response = productController.getAllProductElements();
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(Objects.requireNonNull(response.getBody()).contains(testProduct));
@@ -77,7 +77,7 @@ class ProductControllerTest {
 
     @Test
     @Order(4)
-    void updateStockElement() {
+    void updateElement() {
         testProduct.setKCal(150);
         ResponseEntity<Product> response = productController.updateProductElement(testProduct);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -86,7 +86,7 @@ class ProductControllerTest {
 
     @Test
     @Order(5)
-    void removeProductElement() {
+    void removeElement() {
         ResponseEntity<Product> response = productController.removeProduct(testProduct.getName());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testProduct, response.getBody());

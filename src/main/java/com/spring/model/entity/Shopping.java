@@ -12,10 +12,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Entity(name = "ShoppingList")
 @Table(name = "shopping_list")
-public class ShoppingList implements Serializable {
+public class Shopping implements Serializable {
 
     @EmbeddedId
-    private ShoppingListKey key;
+    private ShoppingKey key;
 
     @ManyToOne
     @JoinColumn(name = "product_name", referencedColumnName = "name", insertable = false, updatable = false)
@@ -30,7 +30,7 @@ public class ShoppingList implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     @Embeddable
-    public static class ShoppingListKey implements Serializable {
+    public static class ShoppingKey implements Serializable {
 
         @Column(name = "list_name", nullable = false)
         private String listName;

@@ -1,6 +1,6 @@
 package com.spring.model.response;
 
-import lombok.Getter;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.ObjectError;
 
@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-@Getter
+@Data
 public class ApiError {
     private final HttpStatus status;
     private final String requestPath;

@@ -1,0 +1,69 @@
+package com.spring.controller;
+
+import com.spring.database.ShoppingDatabase;
+import com.spring.model.entity.Shopping;
+import com.spring.model.request.ShoppingRequest;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+public class ShoppingController {
+
+    @Autowired
+    private ShoppingDatabase shoppingDatabase;
+
+    @ApiOperation("Request to get a shoppingList element by it's name.")
+    @RequestMapping(value = "/shopping/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Shopping> getElement(
+            @RequestParam(value = "list name", defaultValue = "Standardliste") String listName,
+            @RequestParam(value = "product name", defaultValue = "Apfel") String productName) {
+
+        return ResponseEntity.ok(shoppingDatabase.getElement(listName, productName));
+    }
+
+    @ApiOperation("Request to get all shoppingList elements.")
+    @RequestMapping(value = "/shopping/get-list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Shopping>> getAllElementsFromList(
+            @RequestParam(value = "list name", defaultValue = "Standardliste") String listName) {
+
+        return ResponseEntity.ok(shoppingDatabase.getAllElementsFromList(listName));
+    }
+
+    @ApiOperation("Request to get all shoppingList elements.")
+    @RequestMapping(value = "/shopping/get-all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Shopping>> getAllElements() {
+
+        return ResponseEntity.ok(shoppingDatabase.getAllElements());
+    }
+
+    @ApiOperation("Request to add a new shoppingList element.")
+    @RequestMapping(value = "/shopping/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Shopping> addElement(
+            @RequestBody ShoppingRequest request) {
+
+        return ResponseEntity.ok(shoppingDatabase.addElement(request.getListName(), request.getProductName(), request.getNumber()));
+    }
+
+    @ApiOperation("Request to update a shoppingList element.")
+    @RequestMapping(value = "/shopping/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Shopping> updateShoppingListElement(
+            @RequestBody ShoppingRequest request) {
+
+        return ResponseEntity.ok(shoppingDatabase.updateElement(request.getListName(), request.getProductName(), request.getNumber()));
+    }
+
+    @ApiOperation("Request to update a shoppingList element.")
+    @RequestMapping(value = "/shopping/remove", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Shopping> removeShoppingListElement(
+            @RequestParam(value = "list name", defaultValue = "Standardliste") String listName,
+            @RequestParam(value = "product name", defaultValue = "Apfel") String productName) {
+
+        return ResponseEntity.ok(shoppingDatabase.removeElement(listName, productName));
+    }
+}

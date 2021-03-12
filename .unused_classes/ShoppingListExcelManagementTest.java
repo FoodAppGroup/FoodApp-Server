@@ -24,7 +24,7 @@ class ShoppingListExcelManagementTest {
         PropertyReader.getInstance().initTestProperties();
         excelManagement = new ShoppingListExcelManagement();
 
-        //shoppingList.setKey(new ShoppingListKey("testListe", "Nudeln"));
+        //shoppingList.setKey(new ShoppingKey("testListe", "Nudeln"));
         shoppingList.setNumber(1);
 
         list.add(shoppingList);
