@@ -3,7 +3,7 @@
 name: CI
 
 # Controls when the action will run.
-on: [ push, pull_request ]
+on: [ push ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -39,6 +39,3 @@ jobs:
 
       - name: Run Tests
         run: mvn test
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v1
