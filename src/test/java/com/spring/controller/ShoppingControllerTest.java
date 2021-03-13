@@ -101,7 +101,7 @@ class ShoppingControllerTest {
     @Order(5)
     void updateElement() {
         testShopping.setNumber(15);
-        ResponseEntity<Shopping> response = shoppingController.updateShoppingListElement(
+        ResponseEntity<Shopping> response = shoppingController.updateElement(
                 new ShoppingRequest(testShopping.getKey().getListName(), testShopping.getKey().getProductName(), testShopping.getNumber()));
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testShopping, response.getBody());
@@ -110,7 +110,7 @@ class ShoppingControllerTest {
     @Test
     @Order(6)
     void removeElement() {
-        ResponseEntity<Shopping> response = shoppingController.removeShoppingListElement(testShopping.getKey().getListName(), testShopping.getKey().getProductName());
+        ResponseEntity<Shopping> response = shoppingController.removeElement(testShopping.getKey().getListName(), testShopping.getKey().getProductName());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(testShopping, response.getBody());
 

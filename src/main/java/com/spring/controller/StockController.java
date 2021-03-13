@@ -43,7 +43,7 @@ public class StockController {
     }
 
     @ApiOperation("Request to update a stock element.")
-    @RequestMapping(value = "/stock/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/stock/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Stock> updateElement(
             @RequestBody StockRequest request) {
 
@@ -51,7 +51,7 @@ public class StockController {
     }
 
     @ApiOperation("Request to update a stock element.")
-    @RequestMapping(value = "/stock/remove", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/stock/remove", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Stock> removeElement(
             @RequestParam(value = "product name", defaultValue = "Apfel") String productName) {
 
@@ -59,14 +59,14 @@ public class StockController {
     }
 
     @ApiOperation("Update the database with the backup file.")
-    @RequestMapping(value = "/stock/backup/load", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/stock/backup/load", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Stock>> loadBackup() throws IOException {
 
         return ResponseEntity.ok(stockDatabase.loadBackup());
     }
 
     @ApiOperation("Saves the entire table to a file.")
-    @RequestMapping(value = "/stock/backup/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/stock/backup/save", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Stock>> saveBackup() throws IOException {
 
         return ResponseEntity.ok(stockDatabase.saveBackup());

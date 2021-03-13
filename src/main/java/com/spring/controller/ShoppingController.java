@@ -52,16 +52,16 @@ public class ShoppingController {
     }
 
     @ApiOperation("Request to update a shoppingList element.")
-    @RequestMapping(value = "/shopping/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Shopping> updateShoppingListElement(
+    @RequestMapping(value = "/shopping/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Shopping> updateElement(
             @RequestBody ShoppingRequest request) {
 
         return ResponseEntity.ok(shoppingDatabase.updateElement(request.getListName(), request.getProductName(), request.getNumber()));
     }
 
     @ApiOperation("Request to update a shoppingList element.")
-    @RequestMapping(value = "/shopping/remove", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Shopping> removeShoppingListElement(
+    @RequestMapping(value = "/shopping/remove", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Shopping> removeElement(
             @RequestParam(value = "list name", defaultValue = "Standardliste") String listName,
             @RequestParam(value = "product name", defaultValue = "Apfel") String productName) {
 
@@ -69,14 +69,14 @@ public class ShoppingController {
     }
 
     @ApiOperation("Update the database with the backup file.")
-    @RequestMapping(value = "/shopping/backup/load", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/shopping/backup/load", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Shopping>> loadBackup() throws IOException {
 
         return ResponseEntity.ok(shoppingDatabase.loadBackup());
     }
 
     @ApiOperation("Saves the entire table to a file.")
-    @RequestMapping(value = "/shopping/backup/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/shopping/backup/save", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Shopping>> saveBackup() throws IOException {
 
         return ResponseEntity.ok(shoppingDatabase.saveBackup());
