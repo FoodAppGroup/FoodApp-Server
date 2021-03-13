@@ -42,7 +42,7 @@ public class ProductController {
     }
 
     @ApiOperation("Request to update a product element.")
-    @RequestMapping(value = "/product/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> updateElement(
             @RequestBody Product product) {
 
@@ -50,7 +50,7 @@ public class ProductController {
     }
 
     @ApiOperation("Request to update a product element.")
-    @RequestMapping(value = "/product/remove", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/remove", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> removeElement(
             @RequestBody String productName) {
 
@@ -58,14 +58,14 @@ public class ProductController {
     }
 
     @ApiOperation("Update the database with the backup file.")
-    @RequestMapping(value = "/product/backup/load", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/backup/load", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Product>> loadBackup() throws IOException {
 
         return ResponseEntity.ok(productDatabase.loadBackup());
     }
 
     @ApiOperation("Saves the entire product table to a file.")
-    @RequestMapping(value = "/product/backup/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/backup/save", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Product>> saveBackup() throws IOException {
 
         return ResponseEntity.ok(productDatabase.saveBackup());
