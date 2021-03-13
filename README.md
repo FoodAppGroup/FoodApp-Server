@@ -3,6 +3,9 @@
 
 # Fresh Planner
 
+This Backend depends on a MySQL-Database and provides a backend for it. Read the `Database Information` for more details
+and open http://localhost:8080/swagger-ui/ to see the provided endpoints.
+
 ## Useful Links
 
 * [Swagger Tutorial](https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
