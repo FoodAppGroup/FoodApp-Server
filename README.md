@@ -8,6 +8,14 @@ and open http://localhost:8080/swagger-ui/ to see the provided endpoints.
 
 ![System Modelling](.documentation/files/Modelling_System.png)
 
+## Database Information
+
+All details can be found in this file: [Database Information](.documentation/database.md)
+
+## JPA Class Information
+
+All details can be found in this file: [Classes Information](.documentation/java_classes.md)
+
 ## Useful Links
 
 * [Swagger Tutorial](https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
@@ -17,11 +25,3 @@ and open http://localhost:8080/swagger-ui/ to see the provided endpoints.
 * [CodeCoverageRepo](https://about.codecov.io/)
 * [Docker Image](https://hub.docker.com/r/felixsteinke/private/tags)
 * http://localhost:8080/swagger-ui/
-
-## Database Information
-
-All details can be found in this file: [Database Information](.documentation/database.md)
-
-## JPA Class Information
-
-All details can be found in this file: [Classes Information](.documentation/java_classes.md)
