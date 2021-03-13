@@ -1,4 +1,4 @@
-package jsonUtility;
+package com.spring.dataprovider.jsonUtility;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
