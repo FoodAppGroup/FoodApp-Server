@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping("/stock")
 public class StockController {
 
     @Autowired
     private StockDatabase stockDatabase;
 
     @ApiOperation("Request to get a stock element by it's name.")
-    @RequestMapping(value = "/stock/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Stock> getElement(
             @RequestParam(value = "product name", defaultValue = "Apfel") String productName) {
 
@@ -28,14 +28,14 @@ public class StockController {
     }
 
     @ApiOperation("Request to get all stock elements.")
-    @RequestMapping(value = "/stock/get-all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Stock>> getAllElements() {
 
         return ResponseEntity.ok(stockDatabase.getAllElements());
     }
 
     @ApiOperation("Request to add a new stock element.")
-    @RequestMapping(value = "/stock/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Stock> addElement(
             @RequestBody StockRequest request) {
 
@@ -43,7 +43,7 @@ public class StockController {
     }
 
     @ApiOperation("Request to update a stock element.")
-    @RequestMapping(value = "/stock/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Stock> updateElement(
             @RequestBody StockRequest request) {
 
@@ -51,7 +51,7 @@ public class StockController {
     }
 
     @ApiOperation("Request to update a stock element.")
-    @RequestMapping(value = "/stock/remove", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/remove", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Stock> removeElement(
             @RequestParam(value = "product name", defaultValue = "Apfel") String productName) {
 
@@ -59,14 +59,14 @@ public class StockController {
     }
 
     @ApiOperation("Update the database with the backup file.")
-    @RequestMapping(value = "/stock/backup/load", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/backup/load", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Stock>> loadBackup() throws IOException {
 
         return ResponseEntity.ok(stockDatabase.loadBackup());
     }
 
     @ApiOperation("Saves the entire table to a file.")
-    @RequestMapping(value = "/stock/backup/save", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/backup/save", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Stock>> saveBackup() throws IOException {
 
         return ResponseEntity.ok(stockDatabase.saveBackup());
